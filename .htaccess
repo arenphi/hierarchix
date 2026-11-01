@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Skip existing files or directories (assets, .env, vendor, etc.)
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Everything else goes to the public folder
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Block direct access to sensitive files
+<FilesMatch "^(composer\.json|composer\.lock|package\.json|vite\.config\.js|\.env|\.env\.example|\.git|\.gitignore|\.gitattributes)$">
+    Require all denied
+</FilesMatch>
