@@ -347,7 +347,7 @@
         <div class="glass-panel px-6 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <!-- Brand Logo & Title (Hierarchix Decision Tree) -->
             <div class="flex items-center space-x-3.5 group">
-                <a href="{{ url('/landing') }}" class="flex items-center space-x-3">
+                <a href="/" class="flex items-center space-x-3">
                     <svg class="w-8 h-8 sm:w-9 sm:h-9 text-[#98FBCB] drop-shadow-[0_0_8px_rgba(152,251,203,0.5)] group-hover:scale-105 transition-transform flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <!-- Top Node -->
                         <circle cx="12" cy="4.5" r="2.2"/>
@@ -397,7 +397,7 @@
 
             <!-- Header Controls & Indicators -->
             <div class="flex items-center flex-wrap gap-2.5">
-                <a href="{{ url('/landing') }}" class="btn-secondary px-3.5 py-1.5 text-xs font-semibold" title="Kembali ke Story Page">
+                <a href="/" class="btn-secondary px-3.5 py-1.5 text-xs font-semibold" title="Kembali ke Story Page">
                     <span>&larr; Story Page</span>
                 </a>
 
@@ -1331,11 +1331,11 @@
                     <div class="space-y-3.5">
                         <h4 class="text-xs font-bold text-[#98FBCB] tracking-wider uppercase font-mono">Fitur</h4>
                         <ul class="space-y-2.5 text-sm text-slate-400">
-                            <li><a href="{{ url('/ahp') }}" class="hover:text-white transition-colors">Simulasi AHP</a></li>
-                            <li><a href="{{ url('/ahp') }}#step1" class="hover:text-white transition-colors">Template Kasus</a></li>
-                            <li><a href="{{ url('/ahp') }}#step2" class="hover:text-white transition-colors">Manajemen Kriteria</a></li>
-                            <li><a href="{{ url('/ahp') }}#step3" class="hover:text-white transition-colors">Perbandingan Berpasangan</a></li>
-                            <li><a href="{{ url('/ahp') }}#step5" class="hover:text-white transition-colors">Visualisasi 3D Bar</a></li>
+                            <li><a href="/ahp" class="hover:text-white transition-colors">Simulasi AHP</a></li>
+                            <li><a href="/ahp#step1" class="hover:text-white transition-colors">Template Kasus</a></li>
+                            <li><a href="/ahp#step2" class="hover:text-white transition-colors">Manajemen Kriteria</a></li>
+                            <li><a href="/ahp#step3" class="hover:text-white transition-colors">Perbandingan Berpasangan</a></li>
+                            <li><a href="/ahp#step5" class="hover:text-white transition-colors">Visualisasi 3D Bar</a></li>
                         </ul>
                     </div>
 
@@ -1343,11 +1343,11 @@
                     <div class="space-y-3.5">
                         <h4 class="text-xs font-bold text-[#98FBCB] tracking-wider uppercase font-mono">Edukasi</h4>
                         <ul class="space-y-2.5 text-sm text-slate-400">
-                            <li><a href="{{ url('/#pengenalan') }}" class="hover:text-white transition-colors">Tentang AHP</a></li>
-                            <li><a href="{{ url('/#pengenalan') }}" class="hover:text-white transition-colors">Tahapan Algoritma</a></li>
-                            <li><a href="{{ url('/#formula') }}" class="hover:text-white transition-colors">Rumus Matematika</a></li>
-                            <li><a href="{{ url('/#formula') }}" class="hover:text-white transition-colors">Uji Konsistensi (CR)</a></li>
-                            <li><a href="{{ url('/#formula') }}" class="hover:text-white transition-colors">Tabel RI Saaty</a></li>
+                            <li><a href="/#pengenalan" class="hover:text-white transition-colors">Tentang AHP</a></li>
+                            <li><a href="/#pengenalan" class="hover:text-white transition-colors">Tahapan Algoritma</a></li>
+                            <li><a href="/#formula" class="hover:text-white transition-colors">Rumus Matematika</a></li>
+                            <li><a href="/#formula" class="hover:text-white transition-colors">Uji Konsistensi (CR)</a></li>
+                            <li><a href="/#formula" class="hover:text-white transition-colors">Tabel RI Saaty</a></li>
                         </ul>
                     </div>
 
@@ -1357,7 +1357,7 @@
                         <ul class="space-y-2.5 text-sm text-slate-400">
                             <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">GitHub Repo</a></li>
                             <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Portofolio</a></li>
-                            <li><a href="{{ url('/#hero') }}" class="hover:text-white transition-colors">Dokumentasi</a></li>
+                            <li><a href="/#hero" class="hover:text-white transition-colors">Dokumentasi</a></li>
                             <li><a href="https://laravel.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Laravel Framework</a></li>
                             <li><span class="inline-flex items-center text-xs text-slate-500 font-mono">Lisensi MIT</span></li>
                         </ul>
@@ -1751,7 +1751,7 @@
 
         document.addEventListener('DOMContentLoaded', function () {
             const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
-            const calculateUrl = "{{ route('ahp.calculate') }}";
+            const calculateUrl = "/ahp/calculate";
 
             const critSliders = document.querySelectorAll('.ahp-slider');
             const altSliders = document.querySelectorAll('.ahp-alt-slider');
@@ -1985,7 +1985,146 @@
                 }
             }
 
-            // 7. Pengiriman Asinkron via Fetch API (POST /ahp/calculate Linear Flow)
+            // 6.5. Mesin Kalkulasi Thomas L. Saaty Sisi Klien (Standalone / Fallback)
+            function calculateAhpLocally(criteriaMatrix, alternativeMatrices) {
+                const n = criteriaMatrix.length;
+                const critEval = evaluateMatrixClientSide(criteriaMatrix);
+                const criteriaLabels = currentCriteria.map(c => c.name);
+
+                if (!critEval.is_consistent) {
+                    return {
+                        status: 'error',
+                        message: 'Data tidak konsisten, harap ulangi penilaian',
+                        is_consistent: false,
+                        metrics: {
+                            matrix_size: n,
+                            lambda_max: Number(critEval.lambda_max.toFixed(4)),
+                            ci: Number(critEval.ci.toFixed(4)),
+                            ri: critEval.ri,
+                            cr: Number(critEval.cr.toFixed(4)),
+                            cr_percentage: (critEval.cr * 100).toFixed(2) + '%',
+                            threshold: '10% (0.1)'
+                        },
+                        detail: {
+                            criteria_labels: criteriaLabels,
+                            pairwise_matrix: criteriaMatrix,
+                            column_sums: critEval.column_sums.map(v => Number(v.toFixed(4))),
+                            normalized_matrix: critEval.normalized_matrix.map(row => row.map(v => Number(v.toFixed(4)))),
+                            priority_vector: critEval.priority_vector.map(v => Number(v.toFixed(4)))
+                        }
+                    };
+                }
+
+                const criteriaWeights = criteriaLabels.map((label, idx) => ({
+                    code: 'C' + (idx + 1),
+                    name: label,
+                    weight: Number(critEval.priority_vector[idx].toFixed(4)),
+                    percentage: (critEval.priority_vector[idx] * 100).toFixed(2) + '%'
+                }));
+
+                const altCount = currentAlternatives.length;
+                const altEvaluations = [];
+                let altInconsistent = false;
+                let failedCriterion = null;
+                let failedMetrics = null;
+
+                for (let c = 0; c < n; c++) {
+                    const altMatrix = alternativeMatrices[c] || [];
+                    const altEval = evaluateMatrixClientSide(altMatrix);
+                    altEvaluations.push(altEval);
+
+                    if (!altEval.is_consistent && altCount > 2) {
+                        altInconsistent = true;
+                        failedCriterion = currentCriteria[c] ? currentCriteria[c].name : ('Kriteria ' + (c + 1));
+                        failedMetrics = {
+                            criterion: failedCriterion,
+                            lambda_max: Number(altEval.lambda_max.toFixed(4)),
+                            ci: Number(altEval.ci.toFixed(4)),
+                            ri: altEval.ri,
+                            cr: Number(altEval.cr.toFixed(4)),
+                            cr_percentage: (altEval.cr * 100).toFixed(2) + '%'
+                        };
+                        break;
+                    }
+                }
+
+                if (altInconsistent) {
+                    return {
+                        status: 'error',
+                        message: 'Data perbandingan alternatif pada ' + failedCriterion + ' tidak konsisten (CR > 10%). Harap sesuaikan slider.',
+                        is_consistent: false,
+                        failed_at: failedCriterion,
+                        metrics: failedMetrics
+                    };
+                }
+
+                const synthesisMatrix = [];
+                const rankedAlternatives = [];
+
+                for (let a = 0; a < altCount; a++) {
+                    const altObj = currentAlternatives[a];
+                    let finalScore = 0.0;
+                    const rowWeights = [];
+
+                    for (let c = 0; c < n; c++) {
+                        const localWeight = altEvaluations[c].priority_vector[a] || 0.0;
+                        rowWeights.push(Number(localWeight.toFixed(4)));
+                        finalScore += localWeight * critEval.priority_vector[c];
+                    }
+
+                    synthesisMatrix.push({
+                        code: altObj.code || ('A' + (a + 1)),
+                        name: altObj.name,
+                        weights: rowWeights,
+                        final_score: Number(finalScore.toFixed(4))
+                    });
+
+                    rankedAlternatives.push({
+                        code: altObj.code || ('A' + (a + 1)),
+                        name: altObj.name,
+                        final_score: Number(finalScore.toFixed(4)),
+                        percentage: (finalScore * 100).toFixed(2) + '%'
+                    });
+                }
+
+                rankedAlternatives.sort((x, y) => y.final_score - x.final_score);
+                rankedAlternatives.forEach((alt, idx) => {
+                    alt.rank = idx + 1;
+                });
+
+                return {
+                    status: 'success',
+                    message: 'Perhitungan AHP berhasil dan matriks perbandingan konsisten.',
+                    is_consistent: true,
+                    metrics: {
+                        matrix_size: n,
+                        lambda_max: Number(critEval.lambda_max.toFixed(4)),
+                        ci: Number(critEval.ci.toFixed(4)),
+                        ri: critEval.ri,
+                        cr: Number(critEval.cr.toFixed(4)),
+                        cr_percentage: (critEval.cr * 100).toFixed(2) + '%',
+                        threshold: '10% (0.1)'
+                    },
+                    criteria_weights: criteriaWeights,
+                    priority_vector: critEval.priority_vector.map(v => Number(v.toFixed(4))),
+                    alternatives: rankedAlternatives,
+                    chart_data: {
+                        labels: rankedAlternatives.map(a => a.name),
+                        scores: rankedAlternatives.map(a => a.final_score)
+                    },
+                    detail: {
+                        criteria_labels: criteriaLabels,
+                        pairwise_matrix: criteriaMatrix,
+                        column_sums: critEval.column_sums.map(v => Number(v.toFixed(4))),
+                        normalized_matrix: critEval.normalized_matrix.map(row => row.map(v => Number(v.toFixed(4)))),
+                        priority_vector: critEval.priority_vector.map(v => Number(v.toFixed(4))),
+                        synthesis_matrix: synthesisMatrix,
+                        alternative_evaluations: altEvaluations
+                    }
+                };
+            }
+
+            // 7. Pengiriman Asinkron via Fetch API (dengan Standalone Client-Side Fallback)
             window.triggerAhpCalculation = function () {
                 const criteriaMatrix = buildCriteriaMatrix();
                 const alternativeMatrices = buildAlternativeMatrices();
@@ -1995,6 +2134,20 @@
 
                 // Render tabel tinjauan lokal langsung
                 renderLocalCriteriaMatrixPreview(criteriaMatrix);
+
+                // Jika dihosting statis (Cloudflare Pages, offline, atau tanpa backend PHP)
+                const isStaticPages = window.location.hostname.endsWith('pages.dev') || window.location.protocol === 'file:' || !calculateUrl || calculateUrl.includes('localhost');
+
+                if (isStaticPages) {
+                    const localResult = calculateAhpLocally(criteriaMatrix, alternativeMatrices);
+                    lastCalculationData = localResult;
+                    if (localResult.is_consistent) {
+                        handleSuccessResponse(localResult);
+                    } else {
+                        handleErrorResponse(localResult);
+                    }
+                    return;
+                }
 
                 const payload = {
                     criteria: currentCriteria.map(c => c.name),
@@ -2024,7 +2177,18 @@
                     handleSuccessResponse(data);
                 })
                 .catch((errorData) => {
-                    handleErrorResponse(errorData);
+                    if (errorData && errorData.is_consistent === false) {
+                        handleErrorResponse(errorData);
+                    } else {
+                        // Fallback ke kalkulasi lokal jika backend API gagal/tidak tersedia
+                        const localResult = calculateAhpLocally(criteriaMatrix, alternativeMatrices);
+                        lastCalculationData = localResult;
+                        if (localResult.is_consistent) {
+                            handleSuccessResponse(localResult);
+                        } else {
+                            handleErrorResponse(localResult);
+                        }
+                    }
                 });
             };
 
@@ -2480,6 +2644,6 @@
     </script>
 
     <!-- Skrip Rendering Diagram Batang 3D Interaktif Three.js (Tahap 5) -->
-    <script src="{{ asset('js/ahp-3d.js') }}"></script>
+    <script src="/js/ahp-3d.js"></script>
 </body>
 </html>
