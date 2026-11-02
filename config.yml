@@ -1,8 +1,7 @@
 tunnel: 144d5e6e-b933-4ea9-94c7-90fb1ecc4547
-credentials-file: C:\Users\Zzz\.cloudflared\144d5e6e-b933-4ea9-94c7-90fb1ecc4547.json
+credentials-file: C:/Users/Zzz/.cloudflared/144d5e6e-b933-4ea9-94c7-90fb1ecc4547.json
 
 ingress:
   - hostname: spk.domainanda.com
     service: http://127.0.0.1:8000
   - service: http_status:404
-
