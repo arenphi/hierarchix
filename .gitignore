@@ -25,3 +25,7 @@ Thumbs.db
 
 .vercel
 .env*
+
+temp_chrome_profile/
+~$*
+build_full_report_docx.py
