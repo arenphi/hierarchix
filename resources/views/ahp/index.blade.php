@@ -401,6 +401,10 @@
                     <span>&larr; Story Page</span>
                 </a>
 
+                <a href="#section-csv-import" class="btn-secondary px-3.5 py-1.5 text-xs font-semibold gap-1.5 hover:border-indigo-400 dark:hover:border-indigo-500" title="Buka Modul Impor Dataset CSV">
+                    <span>📂 Impor CSV</span>
+                </a>
+
                 <!-- Status Konsistensi Header -->
                 <div id="statusBadge" class="info-card px-3.5 py-1.5 flex items-center space-x-2 text-xs font-semibold text-slate-700 dark:text-slate-300">
                     <span id="statusIndicatorDot" class="w-2.5 h-2.5 rounded-full bg-[#98FBCB] animate-pulse"></span>
@@ -514,6 +518,125 @@
                     <span class="text-base">🎓</span>
                     <span>5. Siswa Berprestasi</span>
                 </button>
+            </div>
+        </section>
+
+
+        <!-- =========================================================================
+             MODUL IMPOR & PRATINJAU DATASET CSV (DILUAR LOGIKA/PERHITUNGAN AHP)
+             Memungkinkan unggah file CSV, validasi struktur data, visualisasi tabel responsif,
+             dan pratinjau dataset tabular secara interaktif (100% Client-Side).
+             ========================================================================= -->
+        <section id="section-csv-import" class="glass-panel p-6 sm:p-7 space-y-6">
+            <!-- Header Kartu Modul CSV -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200/80 dark:border-slate-700/80 gap-3">
+                <div>
+                    <span class="step-pill bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/30">
+                        Modul Dataset
+                    </span>
+                    <h2 class="text-xl sm:text-2xl font-bold font-display text-slate-900 dark:text-white mt-1 flex items-center gap-2">
+                        <span>Impor & Visualisasi Dataset CSV</span>
+                        <span class="text-[11px] font-sans font-medium px-2 py-0.5 rounded-full bg-slate-200/80 dark:bg-slate-700/80 text-slate-700 dark:text-slate-300">Tabel Responsif</span>
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+                        Unggah file CSV data mentah alternatif & kriteria, validasi format baris-kolom, dan visualisasikan datanya di dalam tabel interaktif.
+                    </p>
+                </div>
+                <!-- Tombol Aksi Cepat -->
+                <div class="flex items-center flex-wrap gap-2 shrink-0">
+                    <button type="button" id="csvLoadSampleBtn" class="btn-primary px-3.5 py-1.5 text-xs font-semibold gap-1.5 cursor-pointer shadow-sm" title="Muat contoh dataset CSV Mawapres">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                        </svg>
+                        <span>Muat Contoh CSV</span>
+                    </button>
+                    <button type="button" id="csvDownloadSampleBtn" class="btn-secondary px-3 py-1.5 text-xs font-semibold gap-1.5 cursor-pointer hover:border-slate-400" title="Unduh file format contoh CSV">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
+                        <span>Unduh CSV</span>
+                    </button>
+                    <button type="button" id="csvClearBtn" class="btn-secondary px-3 py-1.5 text-xs font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 hover:border-rose-300 dark:hover:border-rose-800 gap-1 cursor-pointer" title="Bersihkan tabel data">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                        </svg>
+                        <span>Hapus</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Upload & Drag-and-Drop Area -->
+            <div id="csvDropZone" class="relative border-2 border-dashed border-slate-300 dark:border-slate-600 hover:border-indigo-400 dark:hover:border-indigo-500 rounded-2xl p-6 sm:p-8 text-center bg-slate-50/50 dark:bg-slate-900/30 transition-all cursor-pointer">
+                <input type="file" id="csvFileInput" accept=".csv,text/csv,text/plain" class="hidden">
+                <div class="flex flex-col items-center justify-center space-y-3">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shadow-sm">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                        </svg>
+                    </div>
+                    <div class="space-y-1">
+                        <p class="text-sm font-semibold text-slate-800 dark:text-slate-200">
+                            Tarik & lepas file CSV di sini, atau 
+                            <button type="button" id="csvBrowseBtn" class="text-indigo-600 dark:text-indigo-400 underline hover:text-indigo-700 font-bold ml-1 cursor-pointer">
+                                Telusuri Dokumen
+                            </button>
+                        </p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">
+                            Mendukung file ekstensi <span class="font-mono font-semibold text-slate-700 dark:text-slate-300">.csv</span> dengan pemisah koma (<span class="font-mono">,</span>) atau titik koma (<span class="font-mono">;</span>) &bull; Ukuran maksimal 5 MB
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Validation Feedback Box -->
+            <div id="csvValidationBox" class="hidden"></div>
+
+            <!-- Tabel Visualisasi Dataset Responsif -->
+            <div id="csvTableContainer" class="space-y-4">
+                <!-- Empty State -->
+                <div id="csvEmptyState" class="p-8 text-center rounded-2xl border border-dashed border-slate-200 dark:border-slate-700 bg-white/40 dark:bg-slate-900/20">
+                    <div class="w-10 h-10 mx-auto rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center mb-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <p class="text-sm font-medium text-slate-600 dark:text-slate-400">Belum ada dataset CSV yang diimpor</p>
+                    <p class="text-xs text-slate-400 dark:text-slate-500 mt-1">Unggah file CSV Anda atau klik <button type="button" onclick="document.getElementById('csvLoadSampleBtn').click()" class="text-indigo-600 dark:text-indigo-400 underline font-semibold cursor-pointer">Muat Contoh CSV</button> untuk melihat visualisasi tabel.</p>
+                </div>
+
+                <!-- Active Table Wrapper -->
+                <div id="csvTableWrapper" class="hidden space-y-3">
+                    <!-- Controls Bar: Pencarian & Metadata Kolom -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-xl bg-slate-100/70 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80">
+                        <div class="relative w-full sm:w-72">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                </svg>
+                            </div>
+                            <input type="text" id="csvSearchInput" placeholder="Cari nama alternatif atau skor..." class="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50">
+                        </div>
+                        <div class="flex items-center justify-between sm:justify-end gap-2 text-xs">
+                            <span id="csvRowCounter" class="font-mono font-medium text-slate-600 dark:text-slate-300">
+                                Menampilkan 0 baris
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Responsif Table Box -->
+                    <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm bg-white dark:bg-slate-900/60">
+                        <table class="w-full text-left text-sm border-collapse" id="csvDataTable">
+                            <thead id="csvTableHead"></thead>
+                            <tbody id="csvTableBody"></tbody>
+                        </table>
+                    </div>
+
+                    <!-- Metadata Kolom Terdeteksi -->
+                    <div class="flex items-center flex-wrap gap-1.5 pt-1">
+                        <span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500 mr-1">Kolom Terdeteksi:</span>
+                        <div id="csvTableMeta" class="flex flex-wrap items-center gap-1.5"></div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -2645,5 +2768,8 @@
 
     <!-- Skrip Rendering Diagram Batang 3D Interaktif Three.js (Tahap 5) -->
     <script src="/js/ahp-3d.js"></script>
+
+    <!-- Skrip Khusus Modul Impor & Visualisasi Dataset CSV (Pure Client-Side, Tanpa Backend / AHP Logic) -->
+    <script src="/js/csv-importer.js"></script>
 </body>
 </html>
