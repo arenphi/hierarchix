@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hierarchix - Sistem Pendukung Keputusan AHP 3D</title>
+    <!-- Favicon Hierarchix -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" type="image/png" href="/favicon.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon.png">
 
     <!-- Google Fonts: Outfit, Plus Jakarta Sans, & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,11 +60,42 @@
         }
     </script>
 
-    <!-- Custom Styling: Clean Flat & Subtle Glassmorphism -->
+        <!-- Custom Styling: Clean Flat & Subtle Glassmorphism -->
     <style>
+        /* Mencegah kebocoran scroll horizontal pada seluruh viewport & rasio 9:16 mobile */
+        html, body {
+            overflow-x: hidden !important;
+            max-width: 100vw;
+            width: 100%;
+        }
+
         body {
             transition: background-color 0.3s ease, color 0.3s ease;
-            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Dukungan Scroll Horisontal Halus pada Tabel Mobile */
+        .table-responsive-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+        }
+        .table-responsive-container::-webkit-scrollbar {
+            height: 5px;
+        }
+        .table-responsive-container::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.05);
+            border-radius: 9999px;
+        }
+        .dark .table-responsive-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .table-responsive-container::-webkit-scrollbar-thumb {
+            background: rgba(15, 118, 110, 0.35);
+            border-radius: 9999px;
+        }
+        .dark .table-responsive-container::-webkit-scrollbar-thumb {
+            background: rgba(152, 251, 203, 0.35);
         }
 
         /* Clean Glassmorphic & Flat Surfaces */
@@ -221,8 +257,8 @@
 <body class="min-h-full font-sans antialiased bg-gray-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 relative">
 
     <!-- Ambient Subtle Background Glow -->
-    <div class="ambient-soft w-96 h-96 bg-[#98FBCB] top-10 left-10"></div>
-    <div class="ambient-soft w-96 h-96 bg-teal-300 dark:bg-teal-800 top-72 right-10"></div>
+    <div class="ambient-soft w-72 sm:w-96 h-72 sm:h-96 bg-[#98FBCB] top-10 left-0 sm:left-10 overflow-hidden"></div>
+    <div class="ambient-soft w-72 sm:w-96 h-72 sm:h-96 bg-teal-300 dark:bg-teal-800 top-72 right-0 sm:right-10 overflow-hidden"></div>
     <div class="ambient-soft w-96 h-96 bg-emerald-300 dark:bg-emerald-900 top-[60rem] left-1/4"></div>
 
     <!-- Sticky Navigation Bar dengan Dynamic Scrollspy & Adaptive Glassmorphism -->
@@ -307,7 +343,7 @@
     </header>
 
     <!-- MAIN CONTENT CONTAINER -->
-    <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-24 lg:space-y-28 pt-4 sm:pt-8 pb-16 sm:pb-20">
+    <main class="relative z-10 max-w-6xl mx-auto px-3.5 sm:px-6 lg:px-8 space-y-12 sm:space-y-20 lg:space-y-28 pt-3 sm:pt-8 pb-16 sm:pb-20 w-full overflow-x-hidden">
 
         <!-- ==========================================
              1. HERO SECTION (Floating Abstract Platonic 3D Solids & Dua Kolom)
@@ -368,7 +404,7 @@
                 <!-- Kolom Kanan: 3D Platonic Solids Melayang Megah (Tanpa Frame Pembatas / Seamless) -->
                 <div class="lg:col-span-5 relative flex items-center justify-center">
                     <!-- Wadah Canvas 3D Transparan Melebur Langsung dengan Background Halaman -->
-                    <div id="hero3DContainer" class="w-full h-[300px] sm:h-[380px] lg:h-[540px] relative flex items-center justify-center pointer-events-auto">
+                    <div id="hero3DContainer" class="w-full h-[260px] sm:h-[380px] lg:h-[540px] relative flex items-center justify-center pointer-events-auto max-w-full overflow-hidden">
                         <canvas id="hero3DCanvas" class="w-full h-full block"></canvas>
                     </div>
                 </div>
@@ -394,7 +430,7 @@
             </div>
 
             <!-- Dekomposisi Struktur Tiga Tingkat (Goal -> Kriteria -> Alternatif) -->
-            <div class="glass-card p-6 sm:p-8">
+            <div class="glass-card p-4 sm:p-8">
                 <div class="text-center space-y-1 mb-6">
                     <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white">
                         Struktur Hierarki Keputusan Tiga Tingkat
@@ -527,7 +563,7 @@
             <div id="formulaCardsContainer" class="flex md:grid overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none md:grid-cols-2 gap-4 sm:gap-6 pb-2 md:pb-0 scrollbar-hide">
 
                 <!-- 1. Matriks & Normalisasi Kolom + Contoh Numerik Nyata -->
-                <div class="glass-card p-5 sm:p-7 flex flex-col justify-between space-y-4 w-full flex-shrink-0 md:flex-shrink snap-center min-w-full md:min-w-0">
+                <div class="glass-card p-4 sm:p-7 flex flex-col justify-between space-y-4 w-full flex-shrink-0 md:flex-shrink snap-center min-w-full md:min-w-0">
                     <div class="space-y-3.5">
                         <div class="flex items-center justify-between">
                             <span class="px-3 py-1 rounded-full bg-[#98FBCB]/25 text-teal-900 dark:text-[#98FBCB] text-xs font-bold">
@@ -555,7 +591,7 @@
                                 </div>
                             </div>
                             <div class="p-5 sm:p-6 text-center bg-slate-950">
-                                <div class="font-mono text-xl sm:text-2xl md:text-3xl font-black math-glowing-text tracking-wider">
+                                <div class="font-mono text-base sm:text-2xl md:text-3xl font-black math-glowing-text break-words tracking-wider">
                                     r<sub>ij</sub> = a<sub>ij</sub> / &sum;<sub>k=1</sub><sup>n</sup> a<sub>kj</sub>
                                 </div>
                                 <div class="text-[11px] text-slate-400 mt-2 font-mono">
@@ -581,7 +617,7 @@
                 </div>
 
                 <!-- 2. Bobot Prioritas (Eigen Vector) + Contoh Numerik Nyata -->
-                <div class="glass-card p-5 sm:p-7 flex flex-col justify-between space-y-4 w-full flex-shrink-0 md:flex-shrink snap-center min-w-full md:min-w-0">
+                <div class="glass-card p-4 sm:p-7 flex flex-col justify-between space-y-4 w-full flex-shrink-0 md:flex-shrink snap-center min-w-full md:min-w-0">
                     <div class="space-y-3.5">
                         <div class="flex items-center justify-between">
                             <span class="px-3 py-1 rounded-full bg-teal-100 dark:bg-teal-900/40 text-teal-800 dark:text-teal-200 text-xs font-bold">
@@ -609,7 +645,7 @@
                                 </div>
                             </div>
                             <div class="p-5 sm:p-6 text-center bg-slate-950">
-                                <div class="font-mono text-xl sm:text-2xl md:text-3xl font-black math-glowing-text tracking-wider">
+                                <div class="font-mono text-base sm:text-2xl md:text-3xl font-black math-glowing-text break-words tracking-wider">
                                     w<sub>i</sub> = (1 / n) &times; &sum;<sub>j=1</sub><sup>n</sup> r<sub>ij</sub>
                                 </div>
                                 <div class="text-[11px] text-slate-400 mt-2 font-mono">
@@ -635,7 +671,7 @@
                 </div>
 
                 <!-- 3. RUMUS LAMBDA MAX (λmax) SECARA EKSPLISIT -->
-                <div class="glass-card p-5 sm:p-7 flex flex-col justify-between space-y-4 w-full flex-shrink-0 md:flex-shrink snap-center min-w-full md:min-w-0">
+                <div class="glass-card p-4 sm:p-7 flex flex-col justify-between space-y-4 w-full flex-shrink-0 md:flex-shrink snap-center min-w-full md:min-w-0">
                     <div class="space-y-3.5">
                         <div class="flex items-center justify-between">
                             <span class="px-3 py-1 rounded-full bg-sky-100 dark:bg-sky-900/40 text-sky-800 dark:text-sky-200 text-xs font-bold">
@@ -663,7 +699,7 @@
                                 </div>
                             </div>
                             <div class="p-5 sm:p-6 text-center bg-slate-950">
-                                <div class="font-mono text-lg sm:text-2xl md:text-3xl font-black math-glowing-text tracking-wider">
+                                <div class="font-mono text-sm sm:text-2xl md:text-3xl font-black math-glowing-text break-words tracking-wider">
                                     &lambda;<sub>max</sub> = (1 / n) &times; &sum;<sub>i=1</sub><sup>n</sup> [ (A &times; w)<sub>i</sub> / w<sub>i</sub> ]
                                 </div>
                                 <div class="text-[11px] sm:text-xs text-slate-400 mt-2.5 font-mono">
@@ -687,7 +723,7 @@
                 </div>
 
                 <!-- 4. Uji Konsistensi (CI & CR) -->
-                <div class="glass-card p-5 sm:p-7 flex flex-col justify-between space-y-4 w-full flex-shrink-0 md:flex-shrink snap-center min-w-full md:min-w-0">
+                <div class="glass-card p-4 sm:p-7 flex flex-col justify-between space-y-4 w-full flex-shrink-0 md:flex-shrink snap-center min-w-full md:min-w-0">
                     <div class="space-y-3.5">
                         <div class="flex items-center justify-between">
                             <span class="px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-200 text-xs font-bold">
@@ -715,10 +751,10 @@
                                 </div>
                             </div>
                             <div class="p-5 sm:p-6 space-y-3 text-center bg-slate-950">
-                                <div class="font-mono text-xl sm:text-2xl md:text-3xl font-black math-glowing-text tracking-wider">
+                                <div class="font-mono text-base sm:text-2xl md:text-3xl font-black math-glowing-text break-words tracking-wider">
                                     CI = (&lambda;<sub>max</sub> - n) / (n - 1)
                                 </div>
-                                <div class="font-mono text-xl sm:text-2xl md:text-3xl font-black math-glowing-text tracking-wider pt-2 border-t border-slate-800">
+                                <div class="font-mono text-base sm:text-2xl md:text-3xl font-black math-glowing-text break-words tracking-wider pt-2 border-t border-slate-800">
                                     CR = CI / RI
                                 </div>
                                 <div class="text-[11px] text-slate-400 mt-1 font-mono">
@@ -758,7 +794,7 @@
             </div>
 
             <!-- TABEL RANDOM INDEX (RI) REFERENSI SAATY LENGKAP (n=1 s.d. n=15) -->
-            <div id="ri-table" class="glass-card p-6 sm:p-8 space-y-5">
+            <div id="ri-table" class="glass-card p-4 sm:p-8 space-y-5">
                 <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-200/80 dark:border-slate-700/80 gap-3">
                     <div>
                         <span class="inline-flex items-center space-x-1.5 px-3 py-0.5 rounded-full bg-[#98FBCB]/25 text-teal-900 dark:text-[#98FBCB] border border-[#98FBCB]/50 text-[11px] font-bold uppercase tracking-wider">
@@ -774,7 +810,7 @@
                 </div>
 
                 <!-- Tabel Glassmorphism n=1 sampai n=15 -->
-                <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700/80">
+                <div class="table-responsive-container rounded-xl border border-slate-200 dark:border-slate-700/80 max-w-full">
                     <table class="w-full text-center text-xs font-mono">
                         <thead>
                             <tr class="bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 font-bold border-b border-slate-200 dark:border-slate-700">
@@ -819,7 +855,7 @@
             </div>
 
             <!-- KARTU BESAR PENONJOLAN: Aturan Validasi Mutlak (CR <= 0.1) -->
-            <div class="glass-card p-6 sm:p-8 border-2 border-[#98FBCB]">
+            <div class="glass-card p-4 sm:p-8 border-2 border-[#98FBCB]">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
                     <div class="lg:col-span-8 space-y-3.5 text-left">
                         <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#98FBCB]/25 text-teal-900 dark:text-[#98FBCB] border border-[#98FBCB]/50 text-xs font-bold uppercase tracking-wider">

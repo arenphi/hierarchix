@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Rounded Background Container -->
+  <rect width="64" height="64" rx="16" fill="#042F2E"/>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="14.5" stroke="#98FBCB" stroke-opacity="0.4" stroke-width="2"/>
+  
+  <!-- Hierarchix Tree Icon (scaled to fit) -->
+  <g transform="translate(8, 8) scale(2)" stroke="#98FBCB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Top Node -->
+    <circle cx="12" cy="4.5" r="2.2" fill="#98FBCB" fill-opacity="0.3"/>
+
+    <!-- Branches from Top Node -->
+    <path d="M10.2 5.8 L6.8 9.2"/>
+    <path d="M12 6.7 L12 9.7"/>
+    <path d="M13.8 5.8 L17.2 9.2"/>
+
+    <!-- Mid Nodes -->
+    <circle cx="5" cy="11" r="1.8" fill="#98FBCB" fill-opacity="0.3"/>
+    <circle cx="12" cy="11.5" r="1.3" fill="#98FBCB" fill-opacity="0.3"/>
+    <circle cx="19" cy="11" r="1.8" fill="#98FBCB" fill-opacity="0.3"/>
+
+    <!-- Left Sub-branches -->
+    <path d="M5 12.8 L5 16"/>
+    <path d="M2 16 L8 16"/>
+    <path d="M2 16 L2 18"/>
+    <path d="M5 16 L5 18"/>
+    <path d="M8 16 L8 18"/>
+
+    <!-- Left Leaf Nodes -->
+    <circle cx="2" cy="19.2" r="1.1" fill="#98FBCB"/>
+    <circle cx="5" cy="19.2" r="1.1" fill="#98FBCB"/>
+    <circle cx="8" cy="19.2" r="1.1" fill="#98FBCB"/>
+
+    <!-- Right Sub-branches -->
+    <path d="M19 12.8 L19 16"/>
+    <path d="M16 16 L22 16"/>
+    <path d="M16 16 L16 18"/>
+    <path d="M19 16 L19 18"/>
+    <path d="M22 16 L22 18"/>
+
+    <!-- Right Leaf Nodes -->
+    <circle cx="16" cy="19.2" r="1.1" fill="#98FBCB"/>
+    <circle cx="19" cy="19.2" r="1.1" fill="#98FBCB"/>
+    <circle cx="22" cy="19.2" r="1.1" fill="#98FBCB"/>
+  </g>
+</svg>

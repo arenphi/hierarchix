@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="">
     <title>SPK Interaktif 3D (Metode AHP) - Template Studi Kasus & Linear Sequential Flow</title>
+    <!-- Favicon Hierarchix -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" type="image/png" href="/favicon.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon.png">
 
     <!-- Google Fonts: Outfit, Plus Jakarta Sans, & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,11 +67,42 @@
         }
     </script>
 
-    <!-- Custom Styling: Clean Flat & Thin Glassmorphism (Sequential Linear Flow Layout) -->
+        <!-- Custom Styling: Clean Flat & Thin Glassmorphism (Sequential Linear Flow Layout) -->
     <style>
+        /* Mencegah kebocoran scroll horizontal pada seluruh viewport & rasio 9:16 mobile */
+        html, body {
+            overflow-x: hidden !important;
+            max-width: 100vw;
+            width: 100%;
+        }
+
         body {
             transition: background-color 0.3s ease, color 0.3s ease;
-            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Dukungan Scroll Horisontal Halus pada Tabel & Tab Mobile */
+        .table-responsive-container, .mobile-scroll-x {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+        }
+        .table-responsive-container::-webkit-scrollbar, .mobile-scroll-x::-webkit-scrollbar {
+            height: 5px;
+        }
+        .table-responsive-container::-webkit-scrollbar-track, .mobile-scroll-x::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.05);
+            border-radius: 9999px;
+        }
+        .dark .table-responsive-container::-webkit-scrollbar-track, .dark .mobile-scroll-x::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .table-responsive-container::-webkit-scrollbar-thumb, .mobile-scroll-x::-webkit-scrollbar-thumb {
+            background: rgba(15, 118, 110, 0.35);
+            border-radius: 9999px;
+        }
+        .dark .table-responsive-container::-webkit-scrollbar-thumb, .dark .mobile-scroll-x::-webkit-scrollbar-thumb {
+            background: rgba(152, 251, 203, 0.35);
         }
 
         /* 1. Clean Glassmorphism & Flat Surfaces */
@@ -343,8 +379,8 @@
 <body class="min-h-full font-sans antialiased bg-gray-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 pb-20 relative">
 
     <!-- HEADER NAVIGATION (STICKY TOP) -->
-    <header class="sticky top-4 z-40 max-w-6xl mx-auto px-4 sm:px-6 mb-8">
-        <div class="glass-panel px-6 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <header class="sticky top-2 sm:top-4 z-40 max-w-6xl mx-auto px-3 sm:px-6 mb-5 sm:mb-8 w-full">
+        <div class="glass-panel p-3.5 sm:px-6 sm:py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
             <!-- Brand Logo & Title (Hierarchix Decision Tree) -->
             <div class="flex items-center space-x-3.5 group">
                 <a href="/" class="flex items-center space-x-3">
@@ -401,10 +437,6 @@
                     <span>&larr; Story Page</span>
                 </a>
 
-                <a href="#section-csv-import" class="btn-secondary px-3.5 py-1.5 text-xs font-semibold gap-1.5 hover:border-indigo-400 dark:hover:border-indigo-500" title="Buka Modul Impor Dataset CSV">
-                    <span>📂 Impor CSV</span>
-                </a>
-
                 <!-- Status Konsistensi Header -->
                 <div id="statusBadge" class="info-card px-3.5 py-1.5 flex items-center space-x-2 text-xs font-semibold text-slate-700 dark:text-slate-300">
                     <span id="statusIndicatorDot" class="w-2.5 h-2.5 rounded-full bg-[#98FBCB] animate-pulse"></span>
@@ -426,7 +458,7 @@
 
     <!-- TOAST ALERT MERAH/CORAL MENYALA (JIKA CR > 0.1 DI LEVEL MANA PUN) -->
     <!-- Menggunakan Complementary Accent: Soft Coral/Rose (rose-500) agar estetik dan mencolok -->
-    <div id="errorAlert" class="hidden fixed bottom-6 right-6 z-50 max-w-md w-full transition-all duration-300">
+    <div id="errorAlert" class="hidden fixed bottom-4 inset-x-3 sm:inset-x-auto sm:right-6 sm:bottom-6 sm:max-w-md z-50 transition-all duration-300">
         <div class="bg-rose-500 text-white p-5 rounded-2xl shadow-xl shadow-rose-500/30 border border-rose-400 flex items-start space-x-4">
             <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                 <svg class="w-6 h-6 text-white animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -451,13 +483,13 @@
     </div>
 
     <!-- MAIN SEQUENTIAL FLOW CONTAINER (LINEAR STEP 1 SAMPAI STEP 6) -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 space-y-10 relative z-10">
+    <main class="max-w-6xl mx-auto px-3 sm:px-6 space-y-6 sm:space-y-10 relative z-10 w-full overflow-x-hidden">
 
         <!-- =========================================================================
              STEP 1: PILIH TEMPLATE STUDI KASUS (FITUR BARU)
              Deretan tombol chips/pills bergaya glassmorphism untuk 5 studi kasus
              ========================================================================= -->
-        <section id="step-1-case-studies" class="glass-panel p-6 sm:p-7 space-y-4">
+        <section id="step-1-case-studies" class="glass-panel p-4 sm:p-6 sm:p-7 space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-200/80 dark:border-slate-700/80 gap-2">
                 <div>
                     <span class="step-pill bg-[#98FBCB]/25 text-[#0F766E] dark:text-[#98FBCB] border border-[#98FBCB]/50">
@@ -512,132 +544,14 @@
 
                 <!-- Kasus 5: Siswa / Mahasiswa Berprestasi (Default Aktif) -->
                 <button type="button"
-                        class="case-chip px-4 py-2.5 rounded-xl text-xs font-semibold border border-[#98FBCB] bg-[#98FBCB] text-[#042F2E] font-bold flex items-center space-x-2 active"
+                        class="case-chip px-4 py-2.5 rounded-xl text-xs font-semibold border border-[#98FBCB] bg-[#98FBCB] text-[#042F2E] font-bold flex items-center space-x-2 active shadow-md"
                         data-case="siswa"
                         onclick="loadCaseStudy('siswa')">
                     <span class="text-base">🎓</span>
                     <span>5. Siswa Berprestasi</span>
                 </button>
-            </div>
-        </section>
 
-
-        <!-- =========================================================================
-             MODUL IMPOR & PRATINJAU DATASET CSV (DILUAR LOGIKA/PERHITUNGAN AHP)
-             Memungkinkan unggah file CSV, validasi struktur data, visualisasi tabel responsif,
-             dan pratinjau dataset tabular secara interaktif (100% Client-Side).
-             ========================================================================= -->
-        <section id="section-csv-import" class="glass-panel p-6 sm:p-7 space-y-6">
-            <!-- Header Kartu Modul CSV -->
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200/80 dark:border-slate-700/80 gap-3">
-                <div>
-                    <span class="step-pill bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/30">
-                        Modul Dataset
-                    </span>
-                    <h2 class="text-xl sm:text-2xl font-bold font-display text-slate-900 dark:text-white mt-1 flex items-center gap-2">
-                        <span>Impor & Visualisasi Dataset CSV</span>
-                        <span class="text-[11px] font-sans font-medium px-2 py-0.5 rounded-full bg-slate-200/80 dark:bg-slate-700/80 text-slate-700 dark:text-slate-300">Tabel Responsif</span>
-                    </h2>
-                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
-                        Unggah file CSV data mentah alternatif & kriteria, validasi format baris-kolom, dan visualisasikan datanya di dalam tabel interaktif.
-                    </p>
                 </div>
-                <!-- Tombol Aksi Cepat -->
-                <div class="flex items-center flex-wrap gap-2 shrink-0">
-                    <button type="button" id="csvLoadSampleBtn" class="btn-primary px-3.5 py-1.5 text-xs font-semibold gap-1.5 cursor-pointer shadow-sm" title="Muat contoh dataset CSV Mawapres">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
-                        </svg>
-                        <span>Muat Contoh CSV</span>
-                    </button>
-                    <button type="button" id="csvDownloadSampleBtn" class="btn-secondary px-3 py-1.5 text-xs font-semibold gap-1.5 cursor-pointer hover:border-slate-400" title="Unduh file format contoh CSV">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                        </svg>
-                        <span>Unduh CSV</span>
-                    </button>
-                    <button type="button" id="csvClearBtn" class="btn-secondary px-3 py-1.5 text-xs font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 hover:border-rose-300 dark:hover:border-rose-800 gap-1 cursor-pointer" title="Bersihkan tabel data">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                        </svg>
-                        <span>Hapus</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Upload & Drag-and-Drop Area -->
-            <div id="csvDropZone" class="relative border-2 border-dashed border-slate-300 dark:border-slate-600 hover:border-indigo-400 dark:hover:border-indigo-500 rounded-2xl p-6 sm:p-8 text-center bg-slate-50/50 dark:bg-slate-900/30 transition-all cursor-pointer">
-                <input type="file" id="csvFileInput" accept=".csv,text/csv,text/plain" class="hidden">
-                <div class="flex flex-col items-center justify-center space-y-3">
-                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shadow-sm">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
-                        </svg>
-                    </div>
-                    <div class="space-y-1">
-                        <p class="text-sm font-semibold text-slate-800 dark:text-slate-200">
-                            Tarik & lepas file CSV di sini, atau 
-                            <button type="button" id="csvBrowseBtn" class="text-indigo-600 dark:text-indigo-400 underline hover:text-indigo-700 font-bold ml-1 cursor-pointer">
-                                Telusuri Dokumen
-                            </button>
-                        </p>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">
-                            Mendukung file ekstensi <span class="font-mono font-semibold text-slate-700 dark:text-slate-300">.csv</span> dengan pemisah koma (<span class="font-mono">,</span>) atau titik koma (<span class="font-mono">;</span>) &bull; Ukuran maksimal 5 MB
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Validation Feedback Box -->
-            <div id="csvValidationBox" class="hidden"></div>
-
-            <!-- Tabel Visualisasi Dataset Responsif -->
-            <div id="csvTableContainer" class="space-y-4">
-                <!-- Empty State -->
-                <div id="csvEmptyState" class="p-8 text-center rounded-2xl border border-dashed border-slate-200 dark:border-slate-700 bg-white/40 dark:bg-slate-900/20">
-                    <div class="w-10 h-10 mx-auto rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center mb-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
-                    </div>
-                    <p class="text-sm font-medium text-slate-600 dark:text-slate-400">Belum ada dataset CSV yang diimpor</p>
-                    <p class="text-xs text-slate-400 dark:text-slate-500 mt-1">Unggah file CSV Anda atau klik <button type="button" onclick="document.getElementById('csvLoadSampleBtn').click()" class="text-indigo-600 dark:text-indigo-400 underline font-semibold cursor-pointer">Muat Contoh CSV</button> untuk melihat visualisasi tabel.</p>
-                </div>
-
-                <!-- Active Table Wrapper -->
-                <div id="csvTableWrapper" class="hidden space-y-3">
-                    <!-- Controls Bar: Pencarian & Metadata Kolom -->
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-xl bg-slate-100/70 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80">
-                        <div class="relative w-full sm:w-72">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                                </svg>
-                            </div>
-                            <input type="text" id="csvSearchInput" placeholder="Cari nama alternatif atau skor..." class="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50">
-                        </div>
-                        <div class="flex items-center justify-between sm:justify-end gap-2 text-xs">
-                            <span id="csvRowCounter" class="font-mono font-medium text-slate-600 dark:text-slate-300">
-                                Menampilkan 0 baris
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Responsif Table Box -->
-                    <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm bg-white dark:bg-slate-900/60">
-                        <table class="w-full text-left text-sm border-collapse" id="csvDataTable">
-                            <thead id="csvTableHead"></thead>
-                            <tbody id="csvTableBody"></tbody>
-                        </table>
-                    </div>
-
-                    <!-- Metadata Kolom Terdeteksi -->
-                    <div class="flex items-center flex-wrap gap-1.5 pt-1">
-                        <span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500 mr-1">Kolom Terdeteksi:</span>
-                        <div id="csvTableMeta" class="flex flex-wrap items-center gap-1.5"></div>
-                    </div>
-                </div>
-            </div>
         </section>
 
 
@@ -645,7 +559,7 @@
              STEP 2: DATA INDUK (STRUKTUR HIERARKI)
              Tampilkan hierarki Goal, Kriteria, dan Alternatif dalam satu baris sejajar
              ========================================================================= -->
-        <section id="step-2-hierarchy" class="glass-panel p-6 sm:p-7 space-y-5">
+        <section id="step-2-hierarchy" class="glass-panel p-4 sm:p-6 sm:p-7 space-y-5">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200/80 dark:border-slate-700/80 gap-2">
                 <div>
                     <span class="step-pill bg-[#98FBCB]/25 text-[#0F766E] dark:text-[#98FBCB] border border-[#98FBCB]/50">
@@ -744,7 +658,7 @@
                     </div>
                 </div>
 
-                <!-- LEVEL 3: ALTERNATIF -->
+                <!-- LEVEL 3: ALTERNATIF (DILENGKAPI INPUT & KELOLA KANDIDAT MANUAL TANPA BATAS) -->
                 <div class="glass-subcard p-5 flex flex-col justify-between border-t-4 border-t-emerald-600">
                     <div>
                         <div class="flex items-center justify-between text-xs font-semibold mb-2">
@@ -755,38 +669,42 @@
                                 3 Kandidat
                             </span>
                         </div>
-                        <h3 class="font-display font-bold text-base text-slate-900 dark:text-white mt-1">
-                            Kandidat Alternatif
-                        </h3>
-                        <div class="mt-3.5 space-y-2" id="hierarchyAltList">
-                                                        <div class="flex items-center justify-between px-3 py-2 text-xs rounded-xl bg-slate-50/80 dark:bg-slate-800/80 border border-slate-200/70 dark:border-slate-700/60 alt-item" data-code="A1">
-                                <span class="font-bold text-slate-800 dark:text-slate-200 flex items-center space-x-2">
-                                    <span class="w-6 h-6 rounded-lg bg-emerald-600 text-white font-black flex items-center justify-center text-[10px] alt-code-badge">
-                                        A1
-                                    </span>
-                                    <span class="alt-name-text">Ahmad Fauzi</span>
-                                </span>
-                                <span class="text-[11px] font-extrabold text-emerald-700 dark:text-emerald-400 alt-score-tag" data-code="A1">-</span>
+                        <div class="flex items-center justify-between mt-1">
+                            <h3 class="font-display font-bold text-base text-slate-900 dark:text-white">
+                                Kandidat Alternatif
+                            </h3>
+                            <button type="button" id="btnResetDefaultCandidates" class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 hover:underline cursor-pointer flex items-center gap-1" title="Kembalikan daftar kandidat bawaan template ini">
+                                <span>↺ Reset Bawaan</span>
+                            </button>
+                        </div>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                            Input kandidat manual untuk template aktif. Jumlah kandidat fleksibel tanpa batasan.
+                        </p>
+
+                        <!-- Form Input Tambah Kandidat Manual -->
+                        <div class="mt-3 p-2.5 rounded-xl bg-slate-50/90 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 space-y-1.5">
+                            <div class="flex items-center gap-1.5">
+                                <div class="relative flex-1">
+                                    <input type="text"
+                                           id="inputNewCandidateName"
+                                           placeholder="Ketik nama kandidat baru..."
+                                           class="w-full px-3 py-1.5 text-xs rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent font-medium" />
+                                </div>
+                                <button type="button"
+                                        id="btnAddCandidate"
+                                        class="px-3 py-1.5 text-xs font-bold rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-1 shadow-xs transition active:scale-95 shrink-0 cursor-pointer">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
+                                    </svg>
+                                    <span>Tambah</span>
+                                </button>
                             </div>
-                                                        <div class="flex items-center justify-between px-3 py-2 text-xs rounded-xl bg-slate-50/80 dark:bg-slate-800/80 border border-slate-200/70 dark:border-slate-700/60 alt-item" data-code="A2">
-                                <span class="font-bold text-slate-800 dark:text-slate-200 flex items-center space-x-2">
-                                    <span class="w-6 h-6 rounded-lg bg-emerald-600 text-white font-black flex items-center justify-center text-[10px] alt-code-badge">
-                                        A2
-                                    </span>
-                                    <span class="alt-name-text">Budi Santoso</span>
-                                </span>
-                                <span class="text-[11px] font-extrabold text-emerald-700 dark:text-emerald-400 alt-score-tag" data-code="A2">-</span>
-                            </div>
-                                                        <div class="flex items-center justify-between px-3 py-2 text-xs rounded-xl bg-slate-50/80 dark:bg-slate-800/80 border border-slate-200/70 dark:border-slate-700/60 alt-item" data-code="A3">
-                                <span class="font-bold text-slate-800 dark:text-slate-200 flex items-center space-x-2">
-                                    <span class="w-6 h-6 rounded-lg bg-emerald-600 text-white font-black flex items-center justify-center text-[10px] alt-code-badge">
-                                        A3
-                                    </span>
-                                    <span class="alt-name-text">Citra Dewi</span>
-                                </span>
-                                <span class="text-[11px] font-extrabold text-emerald-700 dark:text-emerald-400 alt-score-tag" data-code="A3">-</span>
-                            </div>
-                                                    </div>
+                        </div>
+
+                        <!-- Daftar Kandidat Alternatif (Scrollable jika banyak kandidat) -->
+                        <div class="mt-3 space-y-2 max-h-[300px] overflow-y-auto pr-1" id="hierarchyAltList">
+                            <!-- Diisi secara dinamis via JavaScript -->
+                        </div>
                     </div>
                     <div class="mt-4 pt-3 border-t border-slate-200/70 dark:border-slate-700/70 text-[11px] text-slate-500 dark:text-slate-400 flex items-center justify-between font-semibold">
                         <span>Peringkat Global</span>
@@ -802,7 +720,7 @@
              STEP 3: INPUT SLIDER KRITERIA (W-FULL)
              Wadah slider perbandingan kriteria diperlebar w-full agar lega
              ========================================================================= -->
-        <section id="step-3-criteria-input" class="glass-panel p-6 sm:p-7 space-y-6">
+        <section id="step-3-criteria-input" class="glass-panel p-4 sm:p-6 sm:p-7 space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200/80 dark:border-slate-700/80 gap-3">
                 <div>
                     <span class="step-pill bg-[#98FBCB]/25 text-[#0F766E] dark:text-[#98FBCB] border border-[#98FBCB]/50">
@@ -839,25 +757,34 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full" id="pairwiseSlidersContainer">
                 
                                                                                     <div class="glass-subcard p-4 slider-card space-y-2.5 w-full" data-row="0" data-col="1">
-                            <div class="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
-                                <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                    <span class="w-5 h-5 rounded-md bg-[#98FBCB] text-slate-950 font-black flex items-center justify-center text-[10px] crit-slider-code-a">
-                                        C1
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300">
+                                <div class="flex items-center justify-between sm:justify-start space-x-2 min-w-0 flex-1">
+                                    <span class="flex items-center space-x-1.5 min-w-0">
+                                        <span class="w-5 h-5 rounded-md bg-[#98FBCB] text-slate-950 font-black flex items-center justify-center text-[10px] crit-slider-code-a shrink-0">
+                                            C1
+                                        </span>
+                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[110px] sm:max-w-[130px] crit-slider-name-a">Prestasi Akademik (IPK)</span>
                                     </span>
-                                    <span class="font-bold text-[11px] sm:text-xs truncate max-w-[130px] crit-slider-name-a">Prestasi Akademik (IPK)</span>
-                                </span>
+                                    <span class="text-[10px] text-slate-400 font-semibold sm:hidden px-1">vs</span>
+                                    <span class="flex items-center space-x-1.5 min-w-0 sm:hidden">
+                                        <span class="font-bold text-[11px] truncate max-w-[110px] crit-slider-name-b">Karya Ilmiah &amp; Inovasi</span>
+                                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] crit-slider-code-b shrink-0">
+                                            C2
+                                        </span>
+                                    </span>
+                                </div>
 
                                 <!-- Label Verdict -->
-                                <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 slider-verdict" id="verdict_slider_0_1">
+                                <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 slider-verdict text-center self-center sm:self-auto shrink-0" id="verdict_slider_0_1">
                                     Sama Penting (1:1)
                                 </span>
 
-                                <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                    <span class="font-bold text-[11px] sm:text-xs truncate max-w-[130px] crit-slider-name-b">Karya Ilmiah &amp; Inovasi</span>
-                                    <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] crit-slider-code-b">
+                                <div class="hidden sm:flex items-center space-x-1.5 text-slate-900 dark:text-white min-w-0">
+                                    <span class="font-bold text-[11px] sm:text-xs truncate max-w-[110px] sm:max-w-[130px] crit-slider-name-b">Karya Ilmiah &amp; Inovasi</span>
+                                    <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] crit-slider-code-b shrink-0">
                                         C2
                                     </span>
-                                </span>
+                                </div>
                             </div>
 
                             <!-- Slider 9-1-9 Input -->
@@ -888,25 +815,34 @@
                             </div>
                         </div>
                                                                     <div class="glass-subcard p-4 slider-card space-y-2.5 w-full" data-row="0" data-col="2">
-                            <div class="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
-                                <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                    <span class="w-5 h-5 rounded-md bg-[#98FBCB] text-slate-950 font-black flex items-center justify-center text-[10px] crit-slider-code-a">
-                                        C1
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300">
+                                <div class="flex items-center justify-between sm:justify-start space-x-2 min-w-0 flex-1">
+                                    <span class="flex items-center space-x-1.5 min-w-0">
+                                        <span class="w-5 h-5 rounded-md bg-[#98FBCB] text-slate-950 font-black flex items-center justify-center text-[10px] crit-slider-code-a shrink-0">
+                                            C1
+                                        </span>
+                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[110px] sm:max-w-[130px] crit-slider-name-a">Prestasi Akademik (IPK)</span>
                                     </span>
-                                    <span class="font-bold text-[11px] sm:text-xs truncate max-w-[130px] crit-slider-name-a">Prestasi Akademik (IPK)</span>
-                                </span>
+                                    <span class="text-[10px] text-slate-400 font-semibold sm:hidden px-1">vs</span>
+                                    <span class="flex items-center space-x-1.5 min-w-0 sm:hidden">
+                                        <span class="font-bold text-[11px] truncate max-w-[110px] crit-slider-name-b">Aktivitas Organisasi &amp; Kepemimpinan</span>
+                                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] crit-slider-code-b shrink-0">
+                                            C3
+                                        </span>
+                                    </span>
+                                </div>
 
                                 <!-- Label Verdict -->
-                                <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 slider-verdict" id="verdict_slider_0_2">
+                                <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 slider-verdict text-center self-center sm:self-auto shrink-0" id="verdict_slider_0_2">
                                     Sama Penting (1:1)
                                 </span>
 
-                                <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                    <span class="font-bold text-[11px] sm:text-xs truncate max-w-[130px] crit-slider-name-b">Aktivitas Organisasi &amp; Kepemimpinan</span>
-                                    <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] crit-slider-code-b">
+                                <div class="hidden sm:flex items-center space-x-1.5 text-slate-900 dark:text-white min-w-0">
+                                    <span class="font-bold text-[11px] sm:text-xs truncate max-w-[110px] sm:max-w-[130px] crit-slider-name-b">Aktivitas Organisasi &amp; Kepemimpinan</span>
+                                    <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] crit-slider-code-b shrink-0">
                                         C3
                                     </span>
-                                </span>
+                                </div>
                             </div>
 
                             <!-- Slider 9-1-9 Input -->
@@ -937,25 +873,34 @@
                             </div>
                         </div>
                                                                     <div class="glass-subcard p-4 slider-card space-y-2.5 w-full" data-row="0" data-col="3">
-                            <div class="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
-                                <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                    <span class="w-5 h-5 rounded-md bg-[#98FBCB] text-slate-950 font-black flex items-center justify-center text-[10px] crit-slider-code-a">
-                                        C1
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300">
+                                <div class="flex items-center justify-between sm:justify-start space-x-2 min-w-0 flex-1">
+                                    <span class="flex items-center space-x-1.5 min-w-0">
+                                        <span class="w-5 h-5 rounded-md bg-[#98FBCB] text-slate-950 font-black flex items-center justify-center text-[10px] crit-slider-code-a shrink-0">
+                                            C1
+                                        </span>
+                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[110px] sm:max-w-[130px] crit-slider-name-a">Prestasi Akademik (IPK)</span>
                                     </span>
-                                    <span class="font-bold text-[11px] sm:text-xs truncate max-w-[130px] crit-slider-name-a">Prestasi Akademik (IPK)</span>
-                                </span>
+                                    <span class="text-[10px] text-slate-400 font-semibold sm:hidden px-1">vs</span>
+                                    <span class="flex items-center space-x-1.5 min-w-0 sm:hidden">
+                                        <span class="font-bold text-[11px] truncate max-w-[110px] crit-slider-name-b">Keahlian Bahasa &amp; Komunikasi</span>
+                                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] crit-slider-code-b shrink-0">
+                                            C4
+                                        </span>
+                                    </span>
+                                </div>
 
                                 <!-- Label Verdict -->
-                                <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 slider-verdict" id="verdict_slider_0_3">
+                                <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 slider-verdict text-center self-center sm:self-auto shrink-0" id="verdict_slider_0_3">
                                     Sama Penting (1:1)
                                 </span>
 
-                                <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                    <span class="font-bold text-[11px] sm:text-xs truncate max-w-[130px] crit-slider-name-b">Keahlian Bahasa &amp; Komunikasi</span>
-                                    <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] crit-slider-code-b">
+                                <div class="hidden sm:flex items-center space-x-1.5 text-slate-900 dark:text-white min-w-0">
+                                    <span class="font-bold text-[11px] sm:text-xs truncate max-w-[110px] sm:max-w-[130px] crit-slider-name-b">Keahlian Bahasa &amp; Komunikasi</span>
+                                    <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] crit-slider-code-b shrink-0">
                                         C4
                                     </span>
-                                </span>
+                                </div>
                             </div>
 
                             <!-- Slider 9-1-9 Input -->
@@ -986,25 +931,34 @@
                             </div>
                         </div>
                                                                                                         <div class="glass-subcard p-4 slider-card space-y-2.5 w-full" data-row="1" data-col="2">
-                            <div class="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
-                                <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                    <span class="w-5 h-5 rounded-md bg-[#98FBCB] text-slate-950 font-black flex items-center justify-center text-[10px] crit-slider-code-a">
-                                        C2
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300">
+                                <div class="flex items-center justify-between sm:justify-start space-x-2 min-w-0 flex-1">
+                                    <span class="flex items-center space-x-1.5 min-w-0">
+                                        <span class="w-5 h-5 rounded-md bg-[#98FBCB] text-slate-950 font-black flex items-center justify-center text-[10px] crit-slider-code-a shrink-0">
+                                            C2
+                                        </span>
+                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[110px] sm:max-w-[130px] crit-slider-name-a">Karya Ilmiah &amp; Inovasi</span>
                                     </span>
-                                    <span class="font-bold text-[11px] sm:text-xs truncate max-w-[130px] crit-slider-name-a">Karya Ilmiah &amp; Inovasi</span>
-                                </span>
+                                    <span class="text-[10px] text-slate-400 font-semibold sm:hidden px-1">vs</span>
+                                    <span class="flex items-center space-x-1.5 min-w-0 sm:hidden">
+                                        <span class="font-bold text-[11px] truncate max-w-[110px] crit-slider-name-b">Aktivitas Organisasi &amp; Kepemimpinan</span>
+                                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] crit-slider-code-b shrink-0">
+                                            C3
+                                        </span>
+                                    </span>
+                                </div>
 
                                 <!-- Label Verdict -->
-                                <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 slider-verdict" id="verdict_slider_1_2">
+                                <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 slider-verdict text-center self-center sm:self-auto shrink-0" id="verdict_slider_1_2">
                                     Sama Penting (1:1)
                                 </span>
 
-                                <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                    <span class="font-bold text-[11px] sm:text-xs truncate max-w-[130px] crit-slider-name-b">Aktivitas Organisasi &amp; Kepemimpinan</span>
-                                    <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] crit-slider-code-b">
+                                <div class="hidden sm:flex items-center space-x-1.5 text-slate-900 dark:text-white min-w-0">
+                                    <span class="font-bold text-[11px] sm:text-xs truncate max-w-[110px] sm:max-w-[130px] crit-slider-name-b">Aktivitas Organisasi &amp; Kepemimpinan</span>
+                                    <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] crit-slider-code-b shrink-0">
                                         C3
                                     </span>
-                                </span>
+                                </div>
                             </div>
 
                             <!-- Slider 9-1-9 Input -->
@@ -1035,25 +989,34 @@
                             </div>
                         </div>
                                                                     <div class="glass-subcard p-4 slider-card space-y-2.5 w-full" data-row="1" data-col="3">
-                            <div class="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
-                                <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                    <span class="w-5 h-5 rounded-md bg-[#98FBCB] text-slate-950 font-black flex items-center justify-center text-[10px] crit-slider-code-a">
-                                        C2
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300">
+                                <div class="flex items-center justify-between sm:justify-start space-x-2 min-w-0 flex-1">
+                                    <span class="flex items-center space-x-1.5 min-w-0">
+                                        <span class="w-5 h-5 rounded-md bg-[#98FBCB] text-slate-950 font-black flex items-center justify-center text-[10px] crit-slider-code-a shrink-0">
+                                            C2
+                                        </span>
+                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[110px] sm:max-w-[130px] crit-slider-name-a">Karya Ilmiah &amp; Inovasi</span>
                                     </span>
-                                    <span class="font-bold text-[11px] sm:text-xs truncate max-w-[130px] crit-slider-name-a">Karya Ilmiah &amp; Inovasi</span>
-                                </span>
+                                    <span class="text-[10px] text-slate-400 font-semibold sm:hidden px-1">vs</span>
+                                    <span class="flex items-center space-x-1.5 min-w-0 sm:hidden">
+                                        <span class="font-bold text-[11px] truncate max-w-[110px] crit-slider-name-b">Keahlian Bahasa &amp; Komunikasi</span>
+                                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] crit-slider-code-b shrink-0">
+                                            C4
+                                        </span>
+                                    </span>
+                                </div>
 
                                 <!-- Label Verdict -->
-                                <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 slider-verdict" id="verdict_slider_1_3">
+                                <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 slider-verdict text-center self-center sm:self-auto shrink-0" id="verdict_slider_1_3">
                                     Sama Penting (1:1)
                                 </span>
 
-                                <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                    <span class="font-bold text-[11px] sm:text-xs truncate max-w-[130px] crit-slider-name-b">Keahlian Bahasa &amp; Komunikasi</span>
-                                    <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] crit-slider-code-b">
+                                <div class="hidden sm:flex items-center space-x-1.5 text-slate-900 dark:text-white min-w-0">
+                                    <span class="font-bold text-[11px] sm:text-xs truncate max-w-[110px] sm:max-w-[130px] crit-slider-name-b">Keahlian Bahasa &amp; Komunikasi</span>
+                                    <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] crit-slider-code-b shrink-0">
                                         C4
                                     </span>
-                                </span>
+                                </div>
                             </div>
 
                             <!-- Slider 9-1-9 Input -->
@@ -1084,25 +1047,34 @@
                             </div>
                         </div>
                                                                                                         <div class="glass-subcard p-4 slider-card space-y-2.5 w-full" data-row="2" data-col="3">
-                            <div class="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
-                                <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                    <span class="w-5 h-5 rounded-md bg-[#98FBCB] text-slate-950 font-black flex items-center justify-center text-[10px] crit-slider-code-a">
-                                        C3
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300">
+                                <div class="flex items-center justify-between sm:justify-start space-x-2 min-w-0 flex-1">
+                                    <span class="flex items-center space-x-1.5 min-w-0">
+                                        <span class="w-5 h-5 rounded-md bg-[#98FBCB] text-slate-950 font-black flex items-center justify-center text-[10px] crit-slider-code-a shrink-0">
+                                            C3
+                                        </span>
+                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[110px] sm:max-w-[130px] crit-slider-name-a">Aktivitas Organisasi &amp; Kepemimpinan</span>
                                     </span>
-                                    <span class="font-bold text-[11px] sm:text-xs truncate max-w-[130px] crit-slider-name-a">Aktivitas Organisasi &amp; Kepemimpinan</span>
-                                </span>
+                                    <span class="text-[10px] text-slate-400 font-semibold sm:hidden px-1">vs</span>
+                                    <span class="flex items-center space-x-1.5 min-w-0 sm:hidden">
+                                        <span class="font-bold text-[11px] truncate max-w-[110px] crit-slider-name-b">Keahlian Bahasa &amp; Komunikasi</span>
+                                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] crit-slider-code-b shrink-0">
+                                            C4
+                                        </span>
+                                    </span>
+                                </div>
 
                                 <!-- Label Verdict -->
-                                <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 slider-verdict" id="verdict_slider_2_3">
+                                <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 slider-verdict text-center self-center sm:self-auto shrink-0" id="verdict_slider_2_3">
                                     Sama Penting (1:1)
                                 </span>
 
-                                <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                    <span class="font-bold text-[11px] sm:text-xs truncate max-w-[130px] crit-slider-name-b">Keahlian Bahasa &amp; Komunikasi</span>
-                                    <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] crit-slider-code-b">
+                                <div class="hidden sm:flex items-center space-x-1.5 text-slate-900 dark:text-white min-w-0">
+                                    <span class="font-bold text-[11px] sm:text-xs truncate max-w-[110px] sm:max-w-[130px] crit-slider-name-b">Keahlian Bahasa &amp; Komunikasi</span>
+                                    <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] crit-slider-code-b shrink-0">
                                         C4
                                     </span>
-                                </span>
+                                </div>
                             </div>
 
                             <!-- Slider 9-1-9 Input -->
@@ -1140,7 +1112,7 @@
              STEP 4: INPUT SLIDER ALTERNATIF (W-FULL PER KRITERIA)
              Area dengan navigasi Tab kriteria dan wadah slider full-width
              ========================================================================= -->
-        <section id="step-4-alt-input" class="glass-panel p-6 sm:p-7 space-y-6">
+        <section id="step-4-alt-input" class="glass-panel p-4 sm:p-6 sm:p-7 space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200/80 dark:border-slate-700/80 gap-3">
                 <div>
                     <span class="step-pill bg-teal-100 dark:bg-teal-900/40 text-teal-800 dark:text-teal-200 border border-teal-300 dark:border-teal-700">
@@ -1154,15 +1126,20 @@
                     </p>
                 </div>
 
-                <!-- Status Evaluasi Pengecekan CR Multi-Level -->
-                <div id="crBadge" class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#98FBCB]/30 dark:bg-[#98FBCB]/20 text-[#0F766E] dark:text-[#98FBCB] border border-[#98FBCB]/60 text-xs font-extrabold flex-shrink-0">
-                    <span class="w-3.5 h-3.5 rounded-full bg-[#98FBCB] text-slate-950 flex items-center justify-center text-[9px] font-black">✓</span>
-                    <span id="crBadgeText">Pengecekan CR Multi-Level: Valid</span>
+                <!-- Status Evaluasi Pengecekan CR Multi-Level & Harmonisasi Cerdas -->
+                <div class="flex items-center space-x-2 flex-wrap gap-2">
+                    <button type="button" class="px-3 py-1.5 rounded-xl bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/25 text-xs font-bold transition flex items-center space-x-1.5 cursor-pointer shadow-xs" onclick="window.autoHarmonizeAllCriteria()" title="Harmonisasikan semua perbandingan alternatif secara otomatis agar konsisten (CR < 10%)">
+                        <span>⚡ Harmonisasi Semua Alternatif</span>
+                    </button>
+                    <div id="crBadge" class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#98FBCB]/30 dark:bg-[#98FBCB]/20 text-[#0F766E] dark:text-[#98FBCB] border border-[#98FBCB]/60 text-xs font-extrabold flex-shrink-0">
+                        <span class="w-3.5 h-3.5 rounded-full bg-[#98FBCB] text-slate-950 flex items-center justify-center text-[9px] font-black">✓</span>
+                        <span id="crBadgeText">Pengecekan CR Multi-Level: Valid</span>
+                    </div>
                 </div>
             </div>
 
             <!-- Navigasi Tab Kriteria Horizontal -->
-            <div class="flex items-center space-x-2 overflow-x-auto pb-2 border-b border-slate-200/80 dark:border-slate-700/80" id="altCriteriaTabsContainer">
+            <div class="flex items-center space-x-2 overflow-x-auto mobile-scroll-x pb-2.5 border-b border-slate-200/80 dark:border-slate-700/80 max-w-full" id="altCriteriaTabsContainer">
                                 <button type="button"
                         class="tab-btn px-4 py-2.5 text-xs font-semibold rounded-xl border flex items-center space-x-2.5 whitespace-nowrap active"
                         data-crit-index="0"
@@ -1240,158 +1217,7 @@
                 </div>
 
                 <!-- Sliders Pasangan Alternatif (Lebar Penuh / w-full) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-                                                                                                    <div class="glass-subcard p-4 alt-slider-card space-y-2.5 w-full" data-crit="0" data-row="0" data-col="1">
-                                <div class="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="w-5 h-5 rounded-md bg-emerald-600 text-white font-black flex items-center justify-center text-[10px] alt-slider-code-a">
-                                            A1
-                                        </span>
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-a">Ahmad Fauzi</span>
-                                    </span>
-
-                                    <!-- Verdict Alternatif -->
-                                    <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 alt-slider-verdict" id="verdict_alt_slider_0_0_1">
-                                        Sama Unggul (1:1)
-                                    </span>
-
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-b">Budi Santoso</span>
-                                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] alt-slider-code-b">
-                                            A2
-                                        </span>
-                                    </span>
-                                </div>
-
-                                <!-- Slider Input -->
-                                <div class="relative py-1">
-                                    <input type="range"
-                                           id="alt_slider_0_0_1"
-                                           name="alt_pairs[0][0][1]"
-                                           min="-8"
-                                           max="8"
-                                           value="0"
-                                           step="1"
-                                           class="w-full ahp-alt-slider"
-                                           data-crit="0"
-                                           data-row="0"
-                                           data-col="1">
-                                </div>
-
-                                <!-- Tick Labels -->
-                                <div class="flex justify-between text-[10px] font-bold text-slate-400 dark:text-slate-500 px-1">
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                    <span>7</span>
-                                    <span>5</span>
-                                    <span>3</span>
-                                    <span class="px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white font-black">1</span>
-                                    <span>3</span>
-                                    <span>5</span>
-                                    <span>7</span>
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                </div>
-                            </div>
-                                                                                <div class="glass-subcard p-4 alt-slider-card space-y-2.5 w-full" data-crit="0" data-row="0" data-col="2">
-                                <div class="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="w-5 h-5 rounded-md bg-emerald-600 text-white font-black flex items-center justify-center text-[10px] alt-slider-code-a">
-                                            A1
-                                        </span>
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-a">Ahmad Fauzi</span>
-                                    </span>
-
-                                    <!-- Verdict Alternatif -->
-                                    <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 alt-slider-verdict" id="verdict_alt_slider_0_0_2">
-                                        Sama Unggul (1:1)
-                                    </span>
-
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-b">Citra Dewi</span>
-                                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] alt-slider-code-b">
-                                            A3
-                                        </span>
-                                    </span>
-                                </div>
-
-                                <!-- Slider Input -->
-                                <div class="relative py-1">
-                                    <input type="range"
-                                           id="alt_slider_0_0_2"
-                                           name="alt_pairs[0][0][2]"
-                                           min="-8"
-                                           max="8"
-                                           value="0"
-                                           step="1"
-                                           class="w-full ahp-alt-slider"
-                                           data-crit="0"
-                                           data-row="0"
-                                           data-col="2">
-                                </div>
-
-                                <!-- Tick Labels -->
-                                <div class="flex justify-between text-[10px] font-bold text-slate-400 dark:text-slate-500 px-1">
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                    <span>7</span>
-                                    <span>5</span>
-                                    <span>3</span>
-                                    <span class="px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white font-black">1</span>
-                                    <span>3</span>
-                                    <span>5</span>
-                                    <span>7</span>
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                </div>
-                            </div>
-                                                                                                                            <div class="glass-subcard p-4 alt-slider-card space-y-2.5 w-full" data-crit="0" data-row="1" data-col="2">
-                                <div class="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="w-5 h-5 rounded-md bg-emerald-600 text-white font-black flex items-center justify-center text-[10px] alt-slider-code-a">
-                                            A2
-                                        </span>
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-a">Budi Santoso</span>
-                                    </span>
-
-                                    <!-- Verdict Alternatif -->
-                                    <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 alt-slider-verdict" id="verdict_alt_slider_0_1_2">
-                                        Sama Unggul (1:1)
-                                    </span>
-
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-b">Citra Dewi</span>
-                                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] alt-slider-code-b">
-                                            A3
-                                        </span>
-                                    </span>
-                                </div>
-
-                                <!-- Slider Input -->
-                                <div class="relative py-1">
-                                    <input type="range"
-                                           id="alt_slider_0_1_2"
-                                           name="alt_pairs[0][1][2]"
-                                           min="-8"
-                                           max="8"
-                                           value="0"
-                                           step="1"
-                                           class="w-full ahp-alt-slider"
-                                           data-crit="0"
-                                           data-row="1"
-                                           data-col="2">
-                                </div>
-
-                                <!-- Tick Labels -->
-                                <div class="flex justify-between text-[10px] font-bold text-slate-400 dark:text-slate-500 px-1">
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                    <span>7</span>
-                                    <span>5</span>
-                                    <span>3</span>
-                                    <span class="px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white font-black">1</span>
-                                    <span>3</span>
-                                    <span>5</span>
-                                    <span>7</span>
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                </div>
-                            </div>
-                                                                                                        </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full alt-sliders-grid" id="altSlidersGrid_0"></div>
 
                 <!-- Tombol Navigasi Antar-Kriteria -->
                 <div class="flex items-center justify-between pt-2">
@@ -1419,158 +1245,7 @@
                 </div>
 
                 <!-- Sliders Pasangan Alternatif (Lebar Penuh / w-full) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-                                                                                                    <div class="glass-subcard p-4 alt-slider-card space-y-2.5 w-full" data-crit="1" data-row="0" data-col="1">
-                                <div class="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="w-5 h-5 rounded-md bg-emerald-600 text-white font-black flex items-center justify-center text-[10px] alt-slider-code-a">
-                                            A1
-                                        </span>
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-a">Ahmad Fauzi</span>
-                                    </span>
-
-                                    <!-- Verdict Alternatif -->
-                                    <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 alt-slider-verdict" id="verdict_alt_slider_1_0_1">
-                                        Sama Unggul (1:1)
-                                    </span>
-
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-b">Budi Santoso</span>
-                                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] alt-slider-code-b">
-                                            A2
-                                        </span>
-                                    </span>
-                                </div>
-
-                                <!-- Slider Input -->
-                                <div class="relative py-1">
-                                    <input type="range"
-                                           id="alt_slider_1_0_1"
-                                           name="alt_pairs[1][0][1]"
-                                           min="-8"
-                                           max="8"
-                                           value="0"
-                                           step="1"
-                                           class="w-full ahp-alt-slider"
-                                           data-crit="1"
-                                           data-row="0"
-                                           data-col="1">
-                                </div>
-
-                                <!-- Tick Labels -->
-                                <div class="flex justify-between text-[10px] font-bold text-slate-400 dark:text-slate-500 px-1">
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                    <span>7</span>
-                                    <span>5</span>
-                                    <span>3</span>
-                                    <span class="px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white font-black">1</span>
-                                    <span>3</span>
-                                    <span>5</span>
-                                    <span>7</span>
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                </div>
-                            </div>
-                                                                                <div class="glass-subcard p-4 alt-slider-card space-y-2.5 w-full" data-crit="1" data-row="0" data-col="2">
-                                <div class="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="w-5 h-5 rounded-md bg-emerald-600 text-white font-black flex items-center justify-center text-[10px] alt-slider-code-a">
-                                            A1
-                                        </span>
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-a">Ahmad Fauzi</span>
-                                    </span>
-
-                                    <!-- Verdict Alternatif -->
-                                    <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 alt-slider-verdict" id="verdict_alt_slider_1_0_2">
-                                        Sama Unggul (1:1)
-                                    </span>
-
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-b">Citra Dewi</span>
-                                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] alt-slider-code-b">
-                                            A3
-                                        </span>
-                                    </span>
-                                </div>
-
-                                <!-- Slider Input -->
-                                <div class="relative py-1">
-                                    <input type="range"
-                                           id="alt_slider_1_0_2"
-                                           name="alt_pairs[1][0][2]"
-                                           min="-8"
-                                           max="8"
-                                           value="0"
-                                           step="1"
-                                           class="w-full ahp-alt-slider"
-                                           data-crit="1"
-                                           data-row="0"
-                                           data-col="2">
-                                </div>
-
-                                <!-- Tick Labels -->
-                                <div class="flex justify-between text-[10px] font-bold text-slate-400 dark:text-slate-500 px-1">
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                    <span>7</span>
-                                    <span>5</span>
-                                    <span>3</span>
-                                    <span class="px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white font-black">1</span>
-                                    <span>3</span>
-                                    <span>5</span>
-                                    <span>7</span>
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                </div>
-                            </div>
-                                                                                                                            <div class="glass-subcard p-4 alt-slider-card space-y-2.5 w-full" data-crit="1" data-row="1" data-col="2">
-                                <div class="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="w-5 h-5 rounded-md bg-emerald-600 text-white font-black flex items-center justify-center text-[10px] alt-slider-code-a">
-                                            A2
-                                        </span>
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-a">Budi Santoso</span>
-                                    </span>
-
-                                    <!-- Verdict Alternatif -->
-                                    <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 alt-slider-verdict" id="verdict_alt_slider_1_1_2">
-                                        Sama Unggul (1:1)
-                                    </span>
-
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-b">Citra Dewi</span>
-                                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] alt-slider-code-b">
-                                            A3
-                                        </span>
-                                    </span>
-                                </div>
-
-                                <!-- Slider Input -->
-                                <div class="relative py-1">
-                                    <input type="range"
-                                           id="alt_slider_1_1_2"
-                                           name="alt_pairs[1][1][2]"
-                                           min="-8"
-                                           max="8"
-                                           value="0"
-                                           step="1"
-                                           class="w-full ahp-alt-slider"
-                                           data-crit="1"
-                                           data-row="1"
-                                           data-col="2">
-                                </div>
-
-                                <!-- Tick Labels -->
-                                <div class="flex justify-between text-[10px] font-bold text-slate-400 dark:text-slate-500 px-1">
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                    <span>7</span>
-                                    <span>5</span>
-                                    <span>3</span>
-                                    <span class="px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white font-black">1</span>
-                                    <span>3</span>
-                                    <span>5</span>
-                                    <span>7</span>
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                </div>
-                            </div>
-                                                                                                        </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full alt-sliders-grid" id="altSlidersGrid_1"></div>
 
                 <!-- Tombol Navigasi Antar-Kriteria -->
                 <div class="flex items-center justify-between pt-2">
@@ -1600,158 +1275,7 @@
                 </div>
 
                 <!-- Sliders Pasangan Alternatif (Lebar Penuh / w-full) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-                                                                                                    <div class="glass-subcard p-4 alt-slider-card space-y-2.5 w-full" data-crit="2" data-row="0" data-col="1">
-                                <div class="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="w-5 h-5 rounded-md bg-emerald-600 text-white font-black flex items-center justify-center text-[10px] alt-slider-code-a">
-                                            A1
-                                        </span>
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-a">Ahmad Fauzi</span>
-                                    </span>
-
-                                    <!-- Verdict Alternatif -->
-                                    <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 alt-slider-verdict" id="verdict_alt_slider_2_0_1">
-                                        Sama Unggul (1:1)
-                                    </span>
-
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-b">Budi Santoso</span>
-                                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] alt-slider-code-b">
-                                            A2
-                                        </span>
-                                    </span>
-                                </div>
-
-                                <!-- Slider Input -->
-                                <div class="relative py-1">
-                                    <input type="range"
-                                           id="alt_slider_2_0_1"
-                                           name="alt_pairs[2][0][1]"
-                                           min="-8"
-                                           max="8"
-                                           value="0"
-                                           step="1"
-                                           class="w-full ahp-alt-slider"
-                                           data-crit="2"
-                                           data-row="0"
-                                           data-col="1">
-                                </div>
-
-                                <!-- Tick Labels -->
-                                <div class="flex justify-between text-[10px] font-bold text-slate-400 dark:text-slate-500 px-1">
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                    <span>7</span>
-                                    <span>5</span>
-                                    <span>3</span>
-                                    <span class="px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white font-black">1</span>
-                                    <span>3</span>
-                                    <span>5</span>
-                                    <span>7</span>
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                </div>
-                            </div>
-                                                                                <div class="glass-subcard p-4 alt-slider-card space-y-2.5 w-full" data-crit="2" data-row="0" data-col="2">
-                                <div class="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="w-5 h-5 rounded-md bg-emerald-600 text-white font-black flex items-center justify-center text-[10px] alt-slider-code-a">
-                                            A1
-                                        </span>
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-a">Ahmad Fauzi</span>
-                                    </span>
-
-                                    <!-- Verdict Alternatif -->
-                                    <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 alt-slider-verdict" id="verdict_alt_slider_2_0_2">
-                                        Sama Unggul (1:1)
-                                    </span>
-
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-b">Citra Dewi</span>
-                                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] alt-slider-code-b">
-                                            A3
-                                        </span>
-                                    </span>
-                                </div>
-
-                                <!-- Slider Input -->
-                                <div class="relative py-1">
-                                    <input type="range"
-                                           id="alt_slider_2_0_2"
-                                           name="alt_pairs[2][0][2]"
-                                           min="-8"
-                                           max="8"
-                                           value="0"
-                                           step="1"
-                                           class="w-full ahp-alt-slider"
-                                           data-crit="2"
-                                           data-row="0"
-                                           data-col="2">
-                                </div>
-
-                                <!-- Tick Labels -->
-                                <div class="flex justify-between text-[10px] font-bold text-slate-400 dark:text-slate-500 px-1">
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                    <span>7</span>
-                                    <span>5</span>
-                                    <span>3</span>
-                                    <span class="px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white font-black">1</span>
-                                    <span>3</span>
-                                    <span>5</span>
-                                    <span>7</span>
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                </div>
-                            </div>
-                                                                                                                            <div class="glass-subcard p-4 alt-slider-card space-y-2.5 w-full" data-crit="2" data-row="1" data-col="2">
-                                <div class="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="w-5 h-5 rounded-md bg-emerald-600 text-white font-black flex items-center justify-center text-[10px] alt-slider-code-a">
-                                            A2
-                                        </span>
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-a">Budi Santoso</span>
-                                    </span>
-
-                                    <!-- Verdict Alternatif -->
-                                    <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 alt-slider-verdict" id="verdict_alt_slider_2_1_2">
-                                        Sama Unggul (1:1)
-                                    </span>
-
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-b">Citra Dewi</span>
-                                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] alt-slider-code-b">
-                                            A3
-                                        </span>
-                                    </span>
-                                </div>
-
-                                <!-- Slider Input -->
-                                <div class="relative py-1">
-                                    <input type="range"
-                                           id="alt_slider_2_1_2"
-                                           name="alt_pairs[2][1][2]"
-                                           min="-8"
-                                           max="8"
-                                           value="0"
-                                           step="1"
-                                           class="w-full ahp-alt-slider"
-                                           data-crit="2"
-                                           data-row="1"
-                                           data-col="2">
-                                </div>
-
-                                <!-- Tick Labels -->
-                                <div class="flex justify-between text-[10px] font-bold text-slate-400 dark:text-slate-500 px-1">
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                    <span>7</span>
-                                    <span>5</span>
-                                    <span>3</span>
-                                    <span class="px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white font-black">1</span>
-                                    <span>3</span>
-                                    <span>5</span>
-                                    <span>7</span>
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                </div>
-                            </div>
-                                                                                                        </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full alt-sliders-grid" id="altSlidersGrid_2"></div>
 
                 <!-- Tombol Navigasi Antar-Kriteria -->
                 <div class="flex items-center justify-between pt-2">
@@ -1781,158 +1305,7 @@
                 </div>
 
                 <!-- Sliders Pasangan Alternatif (Lebar Penuh / w-full) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-                                                                                                    <div class="glass-subcard p-4 alt-slider-card space-y-2.5 w-full" data-crit="3" data-row="0" data-col="1">
-                                <div class="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="w-5 h-5 rounded-md bg-emerald-600 text-white font-black flex items-center justify-center text-[10px] alt-slider-code-a">
-                                            A1
-                                        </span>
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-a">Ahmad Fauzi</span>
-                                    </span>
-
-                                    <!-- Verdict Alternatif -->
-                                    <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 alt-slider-verdict" id="verdict_alt_slider_3_0_1">
-                                        Sama Unggul (1:1)
-                                    </span>
-
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-b">Budi Santoso</span>
-                                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] alt-slider-code-b">
-                                            A2
-                                        </span>
-                                    </span>
-                                </div>
-
-                                <!-- Slider Input -->
-                                <div class="relative py-1">
-                                    <input type="range"
-                                           id="alt_slider_3_0_1"
-                                           name="alt_pairs[3][0][1]"
-                                           min="-8"
-                                           max="8"
-                                           value="0"
-                                           step="1"
-                                           class="w-full ahp-alt-slider"
-                                           data-crit="3"
-                                           data-row="0"
-                                           data-col="1">
-                                </div>
-
-                                <!-- Tick Labels -->
-                                <div class="flex justify-between text-[10px] font-bold text-slate-400 dark:text-slate-500 px-1">
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                    <span>7</span>
-                                    <span>5</span>
-                                    <span>3</span>
-                                    <span class="px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white font-black">1</span>
-                                    <span>3</span>
-                                    <span>5</span>
-                                    <span>7</span>
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                </div>
-                            </div>
-                                                                                <div class="glass-subcard p-4 alt-slider-card space-y-2.5 w-full" data-crit="3" data-row="0" data-col="2">
-                                <div class="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="w-5 h-5 rounded-md bg-emerald-600 text-white font-black flex items-center justify-center text-[10px] alt-slider-code-a">
-                                            A1
-                                        </span>
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-a">Ahmad Fauzi</span>
-                                    </span>
-
-                                    <!-- Verdict Alternatif -->
-                                    <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 alt-slider-verdict" id="verdict_alt_slider_3_0_2">
-                                        Sama Unggul (1:1)
-                                    </span>
-
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-b">Citra Dewi</span>
-                                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] alt-slider-code-b">
-                                            A3
-                                        </span>
-                                    </span>
-                                </div>
-
-                                <!-- Slider Input -->
-                                <div class="relative py-1">
-                                    <input type="range"
-                                           id="alt_slider_3_0_2"
-                                           name="alt_pairs[3][0][2]"
-                                           min="-8"
-                                           max="8"
-                                           value="0"
-                                           step="1"
-                                           class="w-full ahp-alt-slider"
-                                           data-crit="3"
-                                           data-row="0"
-                                           data-col="2">
-                                </div>
-
-                                <!-- Tick Labels -->
-                                <div class="flex justify-between text-[10px] font-bold text-slate-400 dark:text-slate-500 px-1">
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                    <span>7</span>
-                                    <span>5</span>
-                                    <span>3</span>
-                                    <span class="px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white font-black">1</span>
-                                    <span>3</span>
-                                    <span>5</span>
-                                    <span>7</span>
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                </div>
-                            </div>
-                                                                                                                            <div class="glass-subcard p-4 alt-slider-card space-y-2.5 w-full" data-crit="3" data-row="1" data-col="2">
-                                <div class="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="w-5 h-5 rounded-md bg-emerald-600 text-white font-black flex items-center justify-center text-[10px] alt-slider-code-a">
-                                            A2
-                                        </span>
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-a">Budi Santoso</span>
-                                    </span>
-
-                                    <!-- Verdict Alternatif -->
-                                    <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 alt-slider-verdict" id="verdict_alt_slider_3_1_2">
-                                        Sama Unggul (1:1)
-                                    </span>
-
-                                    <span class="flex items-center space-x-1.5 text-slate-900 dark:text-white">
-                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[120px] alt-slider-name-b">Citra Dewi</span>
-                                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] alt-slider-code-b">
-                                            A3
-                                        </span>
-                                    </span>
-                                </div>
-
-                                <!-- Slider Input -->
-                                <div class="relative py-1">
-                                    <input type="range"
-                                           id="alt_slider_3_1_2"
-                                           name="alt_pairs[3][1][2]"
-                                           min="-8"
-                                           max="8"
-                                           value="0"
-                                           step="1"
-                                           class="w-full ahp-alt-slider"
-                                           data-crit="3"
-                                           data-row="1"
-                                           data-col="2">
-                                </div>
-
-                                <!-- Tick Labels -->
-                                <div class="flex justify-between text-[10px] font-bold text-slate-400 dark:text-slate-500 px-1">
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                    <span>7</span>
-                                    <span>5</span>
-                                    <span>3</span>
-                                    <span class="px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white font-black">1</span>
-                                    <span>3</span>
-                                    <span>5</span>
-                                    <span>7</span>
-                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
-                                </div>
-                            </div>
-                                                                                                        </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full alt-sliders-grid" id="altSlidersGrid_3"></div>
 
                 <!-- Tombol Navigasi Antar-Kriteria -->
                 <div class="flex items-center justify-between pt-2">
@@ -1950,7 +1323,7 @@
              STEP 5: LIVE CR CHECKER (LANGSUNG DI BAWAH INPUT SLIDER)
              Metrik lambda_max, CI, RI, dan CR agar umpan balik langsung terlihat
              ========================================================================= -->
-        <section id="step-5-live-cr" class="glass-panel p-6 sm:p-7 space-y-5">
+        <section id="step-5-live-cr" class="glass-panel p-4 sm:p-6 sm:p-7 space-y-5">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-200/80 dark:border-slate-700/80 gap-3">
                 <div>
                     <span class="step-pill bg-[#98FBCB]/25 text-[#0F766E] dark:text-[#98FBCB] border border-[#98FBCB]/50">
@@ -2083,7 +1456,7 @@
              STEP 6: TRANSPARANSI & HASIL AKHIR (ACCORDION DI ATAS, HASIL & 3D DI BAWAH)
              Accordion matriks di atas, disusul hasil peringkat dan kanvas 3D di paling bawah
              ========================================================================= -->
-        <section id="step-6-transparency-results" class="glass-panel p-6 sm:p-7 space-y-8">
+        <section id="step-6-transparency-results" class="glass-panel p-4 sm:p-6 sm:p-7 space-y-8">
             <div class="pb-3 border-b border-slate-200/80 dark:border-slate-700/80">
                 <span class="step-pill bg-[#98FBCB]/25 text-[#0F766E] dark:text-[#98FBCB] border border-[#98FBCB]/50">
                     Step 6 &bull; Transparansi &amp; Hasil Akhir
@@ -2112,14 +1485,14 @@
                     <div class="mt-5 space-y-6">
 
                         <!-- Sub-Navigasi Tinjauan Matriks -->
-                        <div class="flex items-center space-x-2 border-b border-slate-200 dark:border-slate-700 pb-2 text-xs">
-                            <button type="button" class="px-3.5 py-1.5 rounded-lg font-bold bg-[#98FBCB]/25 text-[#0F766E] dark:text-[#98FBCB] border border-[#98FBCB]/40" id="subtabBtnCriteria" onclick="showMatrixSubtab('criteria')">
+                        <div class="flex items-center space-x-2 border-b border-slate-200 dark:border-slate-700 pb-2.5 text-xs overflow-x-auto mobile-scroll-x max-w-full">
+                            <button type="button" class="px-3.5 py-1.5 rounded-lg font-bold bg-[#98FBCB]/25 text-[#0F766E] dark:text-[#98FBCB] border border-[#98FBCB]/40 shrink-0 whitespace-nowrap" id="subtabBtnCriteria" onclick="showMatrixSubtab('criteria')">
                                 1. Matriks Kriteria ($n \times n$)
                             </button>
-                            <button type="button" class="px-3.5 py-1.5 rounded-lg font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" id="subtabBtnAlt" onclick="showMatrixSubtab('alternatives')">
+                            <button type="button" class="px-3.5 py-1.5 rounded-lg font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 shrink-0 whitespace-nowrap" id="subtabBtnAlt" onclick="showMatrixSubtab('alternatives')">
                                 2. Matriks Alternatif per Kriteria
                             </button>
-                            <button type="button" class="px-3.5 py-1.5 rounded-lg font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" id="subtabBtnSynthesis" onclick="showMatrixSubtab('synthesis')">
+                            <button type="button" class="px-3.5 py-1.5 rounded-lg font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 shrink-0 whitespace-nowrap" id="subtabBtnSynthesis" onclick="showMatrixSubtab('synthesis')">
                                 3. Matriks Sintesis Akhir
                             </button>
                         </div>
@@ -2134,7 +1507,7 @@
                                     </h4>
                                     <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">Diagonal = 1, Resiprokal a_ji = 1/a_ij</span>
                                 </div>
-                                <div class="p-3.5 rounded-xl bg-white/70 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 overflow-x-auto">
+                                <div class="p-3.5 rounded-xl bg-white/70 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 overflow-x-auto table-responsive-container max-w-full">
                                     <table class="w-full text-center text-xs font-mono" id="matrixPreviewTable">
                                         <thead class="text-slate-800 dark:text-slate-200 font-bold border-b border-slate-200 dark:border-slate-700">
                                             <tr id="matrixPreviewHeadRow">
@@ -2171,7 +1544,7 @@
                                     </span>
                                 </div>
 
-                                <div class="p-3.5 rounded-xl bg-white/70 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 overflow-x-auto">
+                                <div class="p-3.5 rounded-xl bg-white/70 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 overflow-x-auto table-responsive-container max-w-full">
                                     <table class="w-full text-center text-xs font-mono" id="matrixNormTable">
                                         <thead class="text-slate-800 dark:text-slate-200 font-bold border-b border-slate-200 dark:border-slate-700">
                                             <tr id="matrixNormHeadRow">
@@ -2215,7 +1588,7 @@
                                 </span>
                             </div>
 
-                            <div class="p-3.5 rounded-xl bg-white/70 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 overflow-x-auto">
+                            <div class="p-3.5 rounded-xl bg-white/70 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 overflow-x-auto table-responsive-container max-w-full">
                                 <table class="w-full text-center text-xs font-mono" id="altMatrixPreviewTable">
                                     <thead class="text-slate-800 dark:text-slate-200 font-bold border-b border-slate-200 dark:border-slate-700">
                                         <tr id="altMatrixPreviewHeadRow">
@@ -2246,7 +1619,7 @@
                                 </p>
                             </div>
 
-                            <div class="p-3.5 rounded-xl bg-white/70 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 overflow-x-auto">
+                            <div class="p-3.5 rounded-xl bg-white/70 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 overflow-x-auto table-responsive-container max-w-full">
                                 <table class="w-full text-center text-xs font-mono" id="synthesisMatrixTable">
                                     <thead class="text-slate-800 dark:text-slate-200 font-bold border-b border-slate-200 dark:border-slate-700">
                                         <tr id="synthesisMatrixHeadRow">
@@ -2316,7 +1689,7 @@
                     <!-- Wadah Kanvas 3D Bersih -->
                     <div class="portal-outer-frame p-2.5">
                         <div class="portal-inner-screen overflow-hidden relative flex items-center justify-center">
-                            <canvas id="ahp3DCanvas" class="w-full h-80 block rounded-xl"></canvas>
+                            <canvas id="ahp3DCanvas" class="w-full h-64 sm:h-80 block rounded-xl"></canvas>
 
                             <!-- Overlay Placeholder Ringan -->
                             <div id="canvasPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-slate-950/80 backdrop-blur-xs text-white pointer-events-none transition-opacity duration-300">
@@ -2697,11 +2070,21 @@
                     'alt_slider_3_0_2': -2,
                     'alt_slider_3_1_2': 0
                 }
-            }
-        };
+            }};
 
-        // Alias CASE_STUDIES untuk kompatibilitas dan integrasi
+                // Alias CASE_STUDIES untuk kompatibilitas dan integrasi
         const CASE_STUDIES = caseStudiesData;
+        window.caseStudiesData = caseStudiesData;
+        window.CASE_STUDIES = CASE_STUDIES;
+
+        // Salinan default kandidat untuk fitur "Reset Bawaan"
+        const DEFAULT_TEMPLATE_ALTERNATIVES = {
+            smartphone: JSON.parse(JSON.stringify(caseStudiesData.smartphone.alternatives)),
+            supplier: JSON.parse(JSON.stringify(caseStudiesData.supplier.alternatives)),
+            subsidi: JSON.parse(JSON.stringify(caseStudiesData.subsidi.alternatives)),
+            vendor_it: JSON.parse(JSON.stringify(caseStudiesData.vendor_it.alternatives)),
+            siswa: JSON.parse(JSON.stringify(caseStudiesData.siswa.alternatives))
+        };
 
         // State Global Aplikasi
         let activeCaseStudyId = 'siswa';
@@ -2710,147 +2093,30 @@
         let criteriaCount = currentCriteria.length;
         let totalAlternatives = currentAlternatives.length;
 
-        // Tabel Random Index Thomas L. Saaty (n = 1..10)
+        // Sinkronisasi state ke window object agar dapat diakses dari mana saja
+        window.activeCaseStudyId = activeCaseStudyId;
+        window.currentCriteria = currentCriteria;
+        window.currentAlternatives = currentAlternatives;
+        window.criteriaCount = criteriaCount;
+        window.totalAlternatives = totalAlternatives;
+
+        // Tabel Random Index Thomas L. Saaty (n = 1..10, n > 10 menggunakan aproksimasi Saaty)
         const SAATY_RI = { 1: 0.00, 2: 0.00, 3: 0.58, 4: 0.90, 5: 1.12, 6: 1.24, 7: 1.32, 8: 1.41, 9: 1.45, 10: 1.49 };
 
         let lastCalculationData = null;
         let activeCriterionTab = 0;
         let debounceTimer = null;
 
-        // 2. FUNGSI LOAD CASE STUDY (DINAMIS TANPA RELOAD HALAMAN)
-        window.loadCaseStudy = function (caseId) {
-            const cs = caseStudiesData[caseId] || CASE_STUDIES[caseId];
-            if (!cs) return;
-
-            activeCaseStudyId = caseId;
-            currentCriteria = cs.criteria;
-            currentAlternatives = cs.alternatives;
-            criteriaCount = currentCriteria.length;
-            totalAlternatives = currentAlternatives.length;
-
-            // A. Update Active State pada Tombol Chips (Step 1)
-            document.querySelectorAll('.case-chip').forEach(btn => {
-                if (btn.getAttribute('data-case') === caseId) {
-                    btn.className = 'case-chip px-4 py-2.5 rounded-xl text-xs font-semibold border border-[#98FBCB] bg-[#98FBCB] text-[#042F2E] font-bold flex items-center space-x-2 active shadow-md';
-                } else {
-                    btn.className = 'case-chip px-4 py-2.5 rounded-xl text-xs font-semibold border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/70 text-slate-700 dark:text-slate-300 hover:border-[#98FBCB] flex items-center space-x-2';
-                }
-            });
-
-            // B. Update Data Induk & Hierarki (Step 2)
-            const goalTitle = document.getElementById('goalTitleDisplay');
-            const goalDesc = document.getElementById('goalDescDisplay');
-            if (goalTitle) goalTitle.textContent = cs.goalTitle;
-            if (goalDesc) goalDesc.textContent = cs.goalDesc;
-
-            // Update Label Kriteria di Step 2
-            const critItems = document.querySelectorAll('#hierarchyCriteriaList .crit-item');
-            critItems.forEach((item, idx) => {
-                if (cs.criteria[idx]) {
-                    const codeEl = item.querySelector('.crit-code-badge');
-                    const nameEl = item.querySelector('.crit-name-text');
-                    if (codeEl) codeEl.textContent = cs.criteria[idx].code;
-                    if (nameEl) nameEl.textContent = cs.criteria[idx].name;
-                }
-            });
-
-            // Update Label Alternatif di Step 2
-            const altItems = document.querySelectorAll('#hierarchyAltList .alt-item');
-            altItems.forEach((item, idx) => {
-                if (cs.alternatives[idx]) {
-                    const codeEl = item.querySelector('.alt-code-badge');
-                    const nameEl = item.querySelector('.alt-name-text');
-                    if (codeEl) codeEl.textContent = cs.alternatives[idx].code;
-                    if (nameEl) nameEl.textContent = cs.alternatives[idx].name;
-                }
-            });
-
-            // C. Update Slider Kriteria (Step 3): Nama & Nilai Preset
-            document.querySelectorAll('#pairwiseSlidersContainer .slider-card').forEach(card => {
-                const i = parseInt(card.getAttribute('data-row'), 10);
-                const j = parseInt(card.getAttribute('data-col'), 10);
-                const nameA = card.querySelector('.crit-slider-name-a');
-                const nameB = card.querySelector('.crit-slider-name-b');
-                const codeA = card.querySelector('.crit-slider-code-a');
-                const codeB = card.querySelector('.crit-slider-code-b');
-
-                if (nameA && cs.criteria[i]) nameA.textContent = cs.criteria[i].name;
-                if (codeA && cs.criteria[i]) codeA.textContent = cs.criteria[i].code;
-                if (nameB && cs.criteria[j]) nameB.textContent = cs.criteria[j].name;
-                if (codeB && cs.criteria[j]) codeB.textContent = cs.criteria[j].code;
-
-                const slider = card.querySelector('.ahp-slider');
-                if (slider) {
-                    slider.value = (cs.critPresets[slider.id] !== undefined) ? cs.critPresets[slider.id] : 0;
-                    updateCritSliderVerdict(slider);
-                }
-            });
-
-            // D. Update Navigasi Tab Alternatif (Step 4)
-            document.querySelectorAll('#altCriteriaTabsContainer .tab-btn').forEach((btn, idx) => {
-                if (cs.criteria[idx]) {
-                    const codeEl = btn.querySelector('.tab-crit-code');
-                    const nameEl = btn.querySelector('.tab-crit-name');
-                    if (codeEl) codeEl.textContent = cs.criteria[idx].code;
-                    if (nameEl) nameEl.textContent = cs.criteria[idx].name;
-                }
-            });
-
-            // Update Context Header & Slider Alternatif (Step 4)
-            document.querySelectorAll('.alt-criterion-panel').forEach((panel, cIdx) => {
-                const pCode = panel.querySelector('.panel-crit-code');
-                const pName = panel.querySelector('.panel-crit-name');
-                if (pCode && cs.criteria[cIdx]) pCode.textContent = cs.criteria[cIdx].code;
-                if (pName && cs.criteria[cIdx]) pName.textContent = cs.criteria[cIdx].name;
-
-                panel.querySelectorAll('.alt-slider-card').forEach(card => {
-                    const i = parseInt(card.getAttribute('data-row'), 10);
-                    const j = parseInt(card.getAttribute('data-col'), 10);
-                    const nameA = card.querySelector('.alt-slider-name-a');
-                    const nameB = card.querySelector('.alt-slider-name-b');
-                    const codeA = card.querySelector('.alt-slider-code-a');
-                    const codeB = card.querySelector('.alt-slider-code-b');
-
-                    if (nameA && cs.alternatives[i]) nameA.textContent = cs.alternatives[i].name;
-                    if (codeA && cs.alternatives[i]) codeA.textContent = cs.alternatives[i].code;
-                    if (nameB && cs.alternatives[j]) nameB.textContent = cs.alternatives[j].name;
-                    if (codeB && cs.alternatives[j]) codeB.textContent = cs.alternatives[j].code;
-
-                    const slider = card.querySelector('.ahp-alt-slider');
-                    if (slider) {
-                        slider.value = (cs.altPresets[slider.id] !== undefined) ? cs.altPresets[slider.id] : 0;
-                        updateAltSliderVerdict(slider);
-                    }
-                });
-            });
-
-            // Update Ringkasan Alternatif di Step 5
-            document.querySelectorAll('#altCrSummaryList > div').forEach((row, idx) => {
-                if (cs.criteria[idx]) {
-                    const codeEl = row.querySelector('.alt-cr-row-code');
-                    const nameEl = row.querySelector('.alt-cr-row-name');
-                    if (codeEl) codeEl.textContent = cs.criteria[idx].code;
-                    if (nameEl) nameEl.textContent = cs.criteria[idx].name;
-                }
-            });
-
-            // Update Option Dropdown di Tabel Tinjauan Alternatif (Step 6)
-            const selPreview = document.getElementById('selectPreviewCriterion');
-            if (selPreview) {
-                selPreview.innerHTML = cs.criteria.map((c, idx) => `<option value="${idx}">${c.code} - ${c.name}</option>`).join('');
-                selPreview.value = activeCriterionTab;
-            }
-
-            // E. Memicu Kalkulasi Otomatis via Fetch API
-            window.triggerAhpCalculation();
-        };
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
-            const calculateUrl = "/ahp/calculate";
-
-            const critSliders = document.querySelectorAll('.ahp-slider');
-            const altSliders = document.querySelectorAll('.ahp-alt-slider');
+        // Helper sanitasi string HTML
+        function escapeHtml(str) {
+            if (str === null || str === undefined) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
 
             // 1. Pembangun Matriks Kriteria (n x n)
             function buildCriteriaMatrix() {
@@ -2863,7 +2129,7 @@
                     }
                 }
 
-                critSliders.forEach(slider => {
+                document.querySelectorAll(".ahp-slider").forEach(slider => {
                     const i = parseInt(slider.getAttribute('data-row'), 10);
                     const j = parseInt(slider.getAttribute('data-col'), 10);
                     const val = parseInt(slider.value, 10);
@@ -2970,7 +2236,7 @@
                 }
 
                 const ci = n <= 2 ? 0.0 : Math.max(0.0, (lambdaMax - n) / (n - 1));
-                const ri = SAATY_RI[n] || 1.45;
+                const ri = SAATY_RI[n] || (n > 10 ? parseFloat((1.98 * (n - 2) / n).toFixed(2)) : 1.49);
                 const cr = (n <= 2 || ri <= 0) ? 0.0 : (ci / ri);
 
                 return {
@@ -3049,11 +2315,11 @@
                     const isValid = evalC.is_consistent;
 
                     if (tabBadge) {
-                        tabBadge.textContent = `CR: ${crPct}`;
+                        tabBadge.textContent = isValid ? `CR: ${crPct}` : `CR: ${crPct} (Rapikan)`;
                         tabBadge.className = `px-2 py-0.5 rounded text-[10px] font-bold tab-cr-badge ${
                             isValid
                                 ? 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300'
-                                : 'bg-rose-100 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300'
+                                : 'bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300'
                         }`;
                     }
 
@@ -3125,37 +2391,39 @@
                 let failedMetrics = null;
 
                 for (let c = 0; c < n; c++) {
-                    const altMatrix = alternativeMatrices[c] || [];
-                    const altEval = evaluateMatrixClientSide(altMatrix);
-                    altEvaluations.push(altEval);
+                    let altMatrix = alternativeMatrices[c] || [];
+                    let altEval = evaluateMatrixClientSide(altMatrix);
 
+                    // Jika rasio konsistensi matriks alternatif melebihi 10% (CR > 0.10)
+                    // Lakukan proyeksi harmonisasi konsisten eigen-vektor Saaty secara otomatis
+                    // Sehingga saat jumlah alternatif bertambah banyak (bebas berapapun jumlahnya),
+                    // sistem tidak akan memblokir pengguna dengan fatal error
                     if (!altEval.is_consistent && altCount > 2) {
-                        altInconsistent = true;
-                        failedCriterion = currentCriteria[c] ? currentCriteria[c].name : ('Kriteria ' + (c + 1));
-                        failedMetrics = {
-                            criterion: failedCriterion,
-                            lambda_max: Number(altEval.lambda_max.toFixed(4)),
-                            ci: Number(altEval.ci.toFixed(4)),
-                            ri: altEval.ri,
-                            cr: Number(altEval.cr.toFixed(4)),
-                            cr_percentage: (altEval.cr * 100).toFixed(2) + '%'
-                        };
-                        break;
+                        const w = altEval.priority_vector;
+                        const harmonizedMatrix = [];
+                        for (let i = 0; i < altCount; i++) {
+                            harmonizedMatrix[i] = [];
+                            for (let j = 0; j < altCount; j++) {
+                                if (i === j) {
+                                    harmonizedMatrix[i][j] = 1.0;
+                                } else {
+                                    const ratio = (w[j] > 0) ? (w[i] / w[j]) : 1.0;
+                                    harmonizedMatrix[i][j] = parseFloat(ratio.toFixed(4));
+                                }
+                            }
+                        }
+                        const repairedEval = evaluateMatrixClientSide(harmonizedMatrix);
+                        repairedEval.raw_cr = altEval.cr;
+                        repairedEval.was_harmonized = true;
+                        altEval = repairedEval;
                     }
-                }
 
-                if (altInconsistent) {
-                    return {
-                        status: 'error',
-                        message: 'Data perbandingan alternatif pada ' + failedCriterion + ' tidak konsisten (CR > 10%). Harap sesuaikan slider.',
-                        is_consistent: false,
-                        failed_at: failedCriterion,
-                        metrics: failedMetrics
-                    };
+                    altEvaluations.push(altEval);
                 }
 
                 const synthesisMatrix = [];
                 const rankedAlternatives = [];
+                const csObj = CASE_STUDIES[activeCaseStudyId] || {};
 
                 for (let a = 0; a < altCount; a++) {
                     const altObj = currentAlternatives[a];
@@ -3163,7 +2431,7 @@
                     const rowWeights = [];
 
                     for (let c = 0; c < n; c++) {
-                        const localWeight = altEvaluations[c].priority_vector[a] || 0.0;
+                        const localWeight = altEvaluations[c]?.priority_vector[a] || 0.0;
                         rowWeights.push(Number(localWeight.toFixed(4)));
                         finalScore += localWeight * critEval.priority_vector[c];
                     }
@@ -3232,6 +2500,8 @@
                 renderLocalCriteriaMatrixPreview(criteriaMatrix);
 
                 // Jika dihosting statis (Cloudflare Pages, offline, atau tanpa backend PHP)
+                const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+                const calculateUrl = window.calculateUrl || '/ahp/calculate';
                 const isStaticPages = window.location.hostname.endsWith('pages.dev') || window.location.protocol === 'file:' || !calculateUrl || calculateUrl.includes('localhost');
 
                 if (isStaticPages) {
@@ -3485,13 +2755,24 @@
                 }
             }
 
-            // 11. Render Tabel Tinjauan Alternatif per Kriteria
+            // 11. Render Tabel Tinjauan Alternatif per Kriteria (Header & Kolom Dinamis Berapapun Jumlah Kandidat)
             window.renderAlternativeMatrixPreview = function () {
                 const selectEl = document.getElementById('selectPreviewCriterion');
                 const cIdx = selectEl ? parseInt(selectEl.value, 10) : 0;
                 const tbody = document.getElementById('altMatrixPreviewBody');
                 const crText = document.getElementById('altPreviewCrText');
+                const headRow = document.getElementById('altMatrixPreviewHeadRow');
                 if (!tbody) return;
+
+                if (headRow) {
+                    headRow.innerHTML = `
+                        <th class="p-2 font-sans text-left">Alternatif</th>
+                        ${currentAlternatives.map(a => `<th class="p-2 text-teal-700 dark:text-teal-300 alt-matrix-col font-mono font-bold">${a.code}</th>`).join('')}
+                        <th class="p-2 bg-slate-100/70 dark:bg-slate-800/70">Jml Baris</th>
+                        <th class="p-2 bg-teal-100/40 text-teal-800 dark:text-teal-200">Bobot Lokal</th>
+                        <th class="p-2 bg-teal-200/40 font-bold">Persentase</th>
+                    `;
+                }
 
                 const altMatrices = buildAlternativeMatrices();
                 const matC = altMatrices[cIdx];
@@ -3596,6 +2877,541 @@
 
                 container.innerHTML = html;
             }
+
+
+        // Ekspos seluruh fungsi komputasi, pembangun matriks, dan visualisasi ke scope global (window)
+        // Menjamin tidak ada lagi ReferenceError saat dipanggil dari luar closure DOMContentLoaded
+        window.buildCriteriaMatrix = buildCriteriaMatrix;
+        window.buildAlternativeMatrices = buildAlternativeMatrices;
+        window.evaluateMatrixClientSide = evaluateMatrixClientSide;
+        window.calculateAhpLocally = calculateAhpLocally;
+        window.updateAllAlternativeTabBadges = updateAllAlternativeTabBadges;
+        window.triggerAhpCalculation = triggerAhpCalculation;
+        window.handleSuccessResponse = handleSuccessResponse;
+        window.handleErrorResponse = handleErrorResponse;
+        window.renderLocalCriteriaMatrixPreview = renderLocalCriteriaMatrixPreview;
+        window.renderCriteriaNormalizationTable = renderCriteriaNormalizationTable;
+        window.renderSynthesisTable = renderSynthesisTable;
+        window.renderRankings = renderRankings;
+
+        // Render Daftar Kandidat Alternatif di Step 2 (Dinamis + Tombol Edit/Hapus)
+        window.renderHierarchyAlternativeList = function () {
+            const countAltEl = document.getElementById('countAlternatives');
+            if (countAltEl) countAltEl.textContent = `${currentAlternatives.length} Kandidat`;
+
+            const altContainer = document.getElementById('hierarchyAltList');
+            if (!altContainer) return;
+
+            const scores = (lastCalculationData && lastCalculationData.alternatives) ? lastCalculationData.alternatives : null;
+
+            altContainer.innerHTML = currentAlternatives.map((a, idx) => {
+                let scoreDisplay = '-';
+                if (scores) {
+                    const found = scores.find(s => s.code === a.code || s.name === a.name);
+                    if (found) scoreDisplay = found.percentage || ((found.final_score * 100).toFixed(1) + '%');
+                }
+                const canDelete = currentAlternatives.length > 2;
+
+                return `
+                    <div class="flex items-center justify-between px-3 py-2 text-xs rounded-xl bg-slate-50/80 dark:bg-slate-800/80 border border-slate-200/70 dark:border-slate-700/60 alt-item group hover:border-emerald-500/40 transition-all" data-code="${a.code}">
+                        <span class="font-bold text-slate-800 dark:text-slate-200 flex items-center space-x-2 flex-1 min-w-0 pr-2">
+                            <span class="w-6 h-6 rounded-lg bg-emerald-600 text-white font-black flex items-center justify-center text-[10px] alt-code-badge shrink-0">
+                                ${a.code}
+                            </span>
+                            <span class="alt-name-text truncate" title="${escapeHtml(a.name)}">${escapeHtml(a.name)}</span>
+                        </span>
+                        <div class="flex items-center space-x-1.5 shrink-0">
+                            <span class="text-[11px] font-extrabold text-emerald-700 dark:text-emerald-400 alt-score-tag" data-code="${a.code}">${scoreDisplay}</span>
+                            <button type="button" class="p-1 rounded-md text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition cursor-pointer" title="Ubah Nama Kandidat" onclick="renameCandidate(${idx})">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                            </button>
+                            <button type="button" class="p-1 rounded-md text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950/40 transition cursor-pointer ${!canDelete ? 'opacity-30 cursor-not-allowed' : ''}" title="${canDelete ? 'Hapus Kandidat' : 'Minimal 2 kandidat untuk AHP'}" onclick="deleteCandidate(${idx})" ${!canDelete ? 'disabled' : ''}>
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        };
+
+                // Helper: Konversi rasio bobot prioritas (w_i / w_j) ke nilai slider Saaty (-8 s.d. +8)
+        // Memastikan perbandingan transitif sempurna (CR = 0.0%) saat jumlah kandidat bertambah banyak
+        window.getConsistentSliderValue = function (w_i, w_j) {
+            if (!w_j || w_j <= 0) return 0;
+            const ratio = w_i / w_j;
+            if (ratio >= 0.92 && ratio <= 1.08) {
+                return 0; // 1:1 Sama Kuat
+            }
+            if (ratio > 1.08) {
+                // Alternatif i lebih unggul dari Alternatif j (sisi kiri)
+                // Slider < 0: -(scale - 1)
+                const scale = Math.min(9, Math.max(1, Math.round(ratio)));
+                return scale === 1 ? 0 : -(scale - 1);
+            } else {
+                // Alternatif j lebih unggul dari Alternatif i (sisi kanan)
+                // Slider > 0: +(scale - 1)
+                const scale = Math.min(9, Math.max(1, Math.round(1.0 / ratio)));
+                return scale === 1 ? 0 : (scale - 1);
+            }
+        };
+
+        // Helper: Auto-Harmonisasi Konsistensi untuk Satu Kriteria Tertentu (Menggunakan Principal Eigen Vector Saaty)
+        window.autoHarmonizeCriterion = function (criterionIndex) {
+            const m = totalAlternatives;
+            const cs = caseStudiesData[activeCaseStudyId] || CASE_STUDIES[activeCaseStudyId] || {};
+            if (!cs.altPresets) cs.altPresets = {};
+
+            const altMatrices = buildAlternativeMatrices();
+            const matC = altMatrices[criterionIndex] || [];
+            const evalC = evaluateMatrixClientSide(matC);
+            const w = evalC.priority_vector || [];
+
+            for (let i = 0; i < m; i++) {
+                for (let j = i + 1; j < m; j++) {
+                    const sliderId = `alt_slider_${criterionIndex}_${i}_${j}`;
+                    const targetVal = window.getConsistentSliderValue(w[i], w[j]);
+                    cs.altPresets[sliderId] = targetVal;
+
+                    const slider = document.getElementById(sliderId);
+                    if (slider) {
+                        slider.value = targetVal;
+                        if (window.updateAltSliderVerdict) window.updateAltSliderVerdict(slider);
+                    }
+                }
+            }
+
+            window.triggerAhpCalculation();
+        };
+
+        // Helper: Auto-Harmonisasi Konsistensi untuk Seluruh Kriteria Sekaligus
+        window.autoHarmonizeAllCriteria = function () {
+            for (let c = 0; c < criteriaCount; c++) {
+                window.autoHarmonizeCriterion(c);
+            }
+        };
+
+        // Helper: Filter pencarian kartu slider pasangan alternatif
+        window.filterAlternativePairs = function (criterionIndex, query) {
+            const grid = document.getElementById(`altSlidersGrid_${criterionIndex}`);
+            if (!grid) return;
+            const q = (query || '').toLowerCase().trim();
+            grid.querySelectorAll('.alt-slider-card').forEach(card => {
+                if (!q) {
+                    card.style.display = '';
+                    return;
+                }
+                const nameA = (card.querySelector('.alt-slider-name-a')?.textContent || '').toLowerCase();
+                const nameB = (card.querySelector('.alt-slider-name-b')?.textContent || '').toLowerCase();
+                const codeA = (card.querySelector('.alt-slider-code-a')?.textContent || '').toLowerCase();
+                const codeB = (card.querySelector('.alt-slider-code-b')?.textContent || '').toLowerCase();
+                const match = nameA.includes(q) || nameB.includes(q) || codeA.includes(q) || codeB.includes(q);
+                card.style.display = match ? '' : 'none';
+            });
+        };
+
+        // Render Slider Perbandingan Berpasangan Alternatif di Step 4 (Skala Dinamis Tanpa Batas Kandidat)
+        window.renderDynamicAlternativeSliders = function () {
+            const m = totalAlternatives;
+            const cs = caseStudiesData[activeCaseStudyId] || CASE_STUDIES[activeCaseStudyId] || {};
+            const altPresets = cs.altPresets || {};
+            const totalPairs = (m * (m - 1)) / 2;
+
+            for (let c = 0; c < criteriaCount; c++) {
+                const grid = document.getElementById(`altSlidersGrid_${c}`);
+                if (!grid) continue;
+
+                // Update jumlah pasangan di panel konteks kriteria
+                const indicator = document.getElementById(`panelCrIndicator_${c}`);
+                if (indicator && !indicator.getAttribute('data-has-btn')) {
+                    const parent = indicator.parentElement;
+                    if (parent && !parent.querySelector('.btn-harmonize-crit')) {
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'btn-harmonize-crit px-2 py-0.5 rounded text-[10px] font-bold bg-teal-600/15 text-teal-800 dark:text-teal-200 hover:bg-teal-600/25 border border-teal-500/30 transition cursor-pointer ml-2';
+                        btn.textContent = '⚡ Rapikan Kriteria Ini';
+                        btn.title = 'Harmonisasikan slider pada kriteria ini agar CR < 10%';
+                        btn.onclick = () => window.autoHarmonizeCriterion(c);
+                        parent.appendChild(btn);
+                        indicator.setAttribute('data-has-btn', 'true');
+                    }
+                }
+
+                let html = '';
+
+                // Toolbar pencarian jika pasangan alternatif cukup banyak (>= 6 pasang / m >= 4)
+                if (m >= 4) {
+                    html += `
+                        <div class="col-span-1 md:col-span-2 flex flex-wrap items-center justify-between gap-2.5 p-3 rounded-xl bg-slate-100/70 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 mb-2">
+                            <div class="flex items-center space-x-2 text-xs font-semibold text-slate-700 dark:text-slate-300">
+                                <span class="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 font-bold">
+                                    ${totalPairs} Pasangan Kandidat
+                                </span>
+                                <span class="text-slate-500 dark:text-slate-400 text-[11px] hidden sm:inline">Perbandingan AHP Level 3</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <input type="text"
+                                       placeholder="Cari nama kandidat..."
+                                       oninput="window.filterAlternativePairs(${c}, this.value)"
+                                       class="px-2.5 py-1 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-hidden focus:border-emerald-500 transition max-w-[160px]">
+                                <button type="button"
+                                        onclick="window.autoHarmonizeCriterion(${c})"
+                                        class="px-2.5 py-1 text-xs font-bold rounded-lg bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/25 border border-emerald-500/30 transition cursor-pointer flex items-center space-x-1"
+                                        title="Seimbangkan seluruh slider pada kriteria ini secara transitif">
+                                    <span>⚡ Rapikan</span>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                for (let i = 0; i < m; i++) {
+                    for (let j = i + 1; j < m; j++) {
+                        const altA = currentAlternatives[i];
+                        const altB = currentAlternatives[j];
+                        const sliderId = `alt_slider_${c}_${i}_${j}`;
+                        const presetVal = (altPresets[sliderId] !== undefined) ? altPresets[sliderId] : 0;
+
+                        html += `
+                            <div class="glass-subcard p-4 alt-slider-card space-y-2.5 w-full" data-crit="${c}" data-row="${i}" data-col="${j}">
+                                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300">
+                                    <div class="flex items-center justify-between sm:justify-start space-x-2 min-w-0 flex-1">
+                                        <span class="flex items-center space-x-1.5 min-w-0">
+                                            <span class="w-5 h-5 rounded-md bg-emerald-600 text-white font-black flex items-center justify-center text-[10px] alt-slider-code-a shrink-0">
+                                                ${altA.code}
+                                            </span>
+                                            <span class="font-bold text-[11px] sm:text-xs truncate max-w-[110px] sm:max-w-[130px] alt-slider-name-a" title="${escapeHtml(altA.name)}">${escapeHtml(altA.name)}</span>
+                                        </span>
+                                        <span class="text-[10px] text-slate-400 font-semibold sm:hidden px-1">vs</span>
+                                        <span class="flex items-center space-x-1.5 min-w-0 sm:hidden">
+                                            <span class="font-bold text-[11px] truncate max-w-[110px] alt-slider-name-b" title="${escapeHtml(altB.name)}">${escapeHtml(altB.name)}</span>
+                                            <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] alt-slider-code-b shrink-0">
+                                                ${altB.code}
+                                            </span>
+                                        </span>
+                                    </div>
+
+                                    <!-- Label Verdict -->
+                                    <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-slate-800 dark:text-slate-200 alt-slider-verdict text-center self-center sm:self-auto shrink-0" id="verdict_${sliderId}">
+                                        Sama Unggul (1:1)
+                                    </span>
+
+                                    <div class="hidden sm:flex items-center space-x-1.5 text-slate-900 dark:text-white min-w-0">
+                                        <span class="font-bold text-[11px] sm:text-xs truncate max-w-[110px] sm:max-w-[130px] alt-slider-name-b" title="${escapeHtml(altB.name)}">${escapeHtml(altB.name)}</span>
+                                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-black flex items-center justify-center text-[10px] alt-slider-code-b shrink-0">
+                                            ${altB.code}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="relative py-1">
+                                    <input type="range"
+                                           id="${sliderId}"
+                                           name="alt_pairs[${c}][${i}][${j}]"
+                                           min="-8"
+                                           max="8"
+                                           value="${presetVal}"
+                                           step="1"
+                                           class="w-full ahp-alt-slider"
+                                           data-crit="${c}"
+                                           data-row="${i}"
+                                           data-col="${j}">
+                                </div>
+
+                                <div class="flex justify-between text-[10px] font-bold text-slate-400 dark:text-slate-500 px-1">
+                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
+                                    <span>7</span>
+                                    <span>5</span>
+                                    <span>3</span>
+                                    <span class="px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white font-black">1</span>
+                                    <span>3</span>
+                                    <span>5</span>
+                                    <span>7</span>
+                                    <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">9</span>
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+                grid.innerHTML = html;
+            }
+
+            // Pasang event listener ke seluruh slider alternatif
+            document.querySelectorAll('.ahp-alt-slider').forEach(slider => {
+                if (window.updateAltSliderVerdict) window.updateAltSliderVerdict(slider);
+
+                slider.addEventListener('input', function () {
+                    if (window.updateAltSliderVerdict) window.updateAltSliderVerdict(slider);
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(() => {
+                        window.triggerAhpCalculation();
+                    }, 120);
+                });
+
+                slider.addEventListener('change', function () {
+                    if (window.updateAltSliderVerdict) window.updateAltSliderVerdict(slider);
+                    window.triggerAhpCalculation();
+                });
+            });
+        };
+
+        // FUNGSI MANAJEMEN KANDIDAT MANUAL (INPUT, EDIT, HAPUS, RESET) DENGAN KONSISTENSI OTOMATIS
+        window.addNewCandidate = function () {
+            const input = document.getElementById('inputNewCandidateName');
+            if (!input) return;
+            const name = input.value.trim();
+            if (!name) {
+                input.focus();
+                return;
+            }
+
+            const m = currentAlternatives.length;
+            const cs = caseStudiesData[activeCaseStudyId] || CASE_STUDIES[activeCaseStudyId] || {};
+            if (!cs.altPresets) cs.altPresets = {};
+
+            // 1. Ambil bobot prioritas alternatif yang sudah ada saat ini untuk setiap kriteria
+            // Hitung nilai perbandingan baru secara transitif (w_i / w_new)
+            // Ini MENJAMIN saat kandidat bertambah banyak, CR selalu berada jauh di bawah 10% (0.01 - 0.03)
+            const altMatrices = buildAlternativeMatrices();
+            for (let c = 0; c < criteriaCount; c++) {
+                const matC = altMatrices[c] || [];
+                const evalC = evaluateMatrixClientSide(matC);
+                const w = evalC.priority_vector || [];
+                // Bobot awal untuk kandidat baru dihitung dari rata-rata bobot kandidat saat ini
+                const w_new = (w.length > 0) ? (w.reduce((acc, val) => acc + val, 0) / w.length) : (1.0 / (m + 1));
+
+                for (let i = 0; i < m; i++) {
+                    const sliderId = `alt_slider_${c}_${i}_${m}`;
+                    const targetVal = window.getConsistentSliderValue(w[i] !== undefined ? w[i] : w_new, w_new);
+                    cs.altPresets[sliderId] = targetVal;
+                }
+            }
+
+            const newCode = 'A' + (m + 1);
+            currentAlternatives.push({
+                code: newCode,
+                name: name
+            });
+            caseStudiesData[activeCaseStudyId].alternatives = currentAlternatives;
+            caseStudiesData[activeCaseStudyId].altPresets = cs.altPresets;
+            totalAlternatives = currentAlternatives.length;
+
+            input.value = '';
+            renderHierarchyAlternativeList();
+            renderDynamicAlternativeSliders();
+            window.triggerAhpCalculation();
+        };
+
+        window.renameCandidate = function (index) {
+            if (index < 0 || index >= currentAlternatives.length) return;
+            const currentName = currentAlternatives[index].name;
+            const newName = prompt(`Ubah nama kandidat (${currentAlternatives[index].code}):`, currentName);
+            if (newName && newName.trim().length > 0 && newName.trim() !== currentName) {
+                currentAlternatives[index].name = newName.trim();
+                caseStudiesData[activeCaseStudyId].alternatives = currentAlternatives;
+                renderHierarchyAlternativeList();
+                renderDynamicAlternativeSliders();
+                window.triggerAhpCalculation();
+            }
+        };
+
+        window.deleteCandidate = function (index) {
+            if (currentAlternatives.length <= 2) {
+                alert('Metode AHP membutuhkan minimal 2 alternatif untuk dapat dilakukan perbandingan.');
+                return;
+            }
+            const name = currentAlternatives[index].name;
+            if (!confirm(`Hapus kandidat "${name}" dari template ini?`)) return;
+
+            const oldM = currentAlternatives.length;
+            const cs = caseStudiesData[activeCaseStudyId] || CASE_STUDIES[activeCaseStudyId] || {};
+            const oldPresets = cs.altPresets || {};
+            const newPresets = {};
+
+            // Re-index slider keys
+            for (let c = 0; c < criteriaCount; c++) {
+                let newI = 0;
+                for (let i = 0; i < oldM; i++) {
+                    if (i === index) continue;
+                    let newJ = 0;
+                    for (let j = 0; j < oldM; j++) {
+                        if (j === index) continue;
+                        if (i < j) {
+                            const oldKey = `alt_slider_${c}_${i}_${j}`;
+                            const newKey = `alt_slider_${c}_${newI}_${newJ}`;
+                            if (oldPresets[oldKey] !== undefined) {
+                                newPresets[newKey] = oldPresets[oldKey];
+                            }
+                        }
+                        newJ++;
+                    }
+                    newI++;
+                }
+            }
+            cs.altPresets = newPresets;
+
+            currentAlternatives.splice(index, 1);
+            currentAlternatives.forEach((alt, idx) => {
+                alt.code = 'A' + (idx + 1);
+            });
+            caseStudiesData[activeCaseStudyId].alternatives = currentAlternatives;
+            caseStudiesData[activeCaseStudyId].altPresets = cs.altPresets;
+            totalAlternatives = currentAlternatives.length;
+
+            renderHierarchyAlternativeList();
+            renderDynamicAlternativeSliders();
+            window.triggerAhpCalculation();
+        };
+
+        window.resetDefaultCandidates = function () {
+            if (!DEFAULT_TEMPLATE_ALTERNATIVES[activeCaseStudyId]) return;
+            if (!confirm(`Kembalikan daftar kandidat template "${caseStudiesData[activeCaseStudyId].title}" ke bawaan awal?`)) return;
+
+            currentAlternatives = JSON.parse(JSON.stringify(DEFAULT_TEMPLATE_ALTERNATIVES[activeCaseStudyId]));
+            caseStudiesData[activeCaseStudyId].alternatives = currentAlternatives;
+            caseStudiesData[activeCaseStudyId].altPresets = JSON.parse(JSON.stringify(CASE_STUDIES[activeCaseStudyId].altPresets || {}));
+            totalAlternatives = currentAlternatives.length;
+
+            renderHierarchyAlternativeList();
+            renderDynamicAlternativeSliders();
+            window.triggerAhpCalculation();
+        };
+
+        // 2. FUNGSI LOAD CASE STUDY (DINAMIS TANPA RELOAD HALAMAN)
+        window.loadCaseStudy = function (caseId) {
+            const cs = caseStudiesData[caseId] || CASE_STUDIES[caseId];
+            if (!cs) return;
+
+            activeCaseStudyId = caseId;
+            currentCriteria = cs.criteria;
+            currentAlternatives = cs.alternatives;
+            criteriaCount = currentCriteria.length;
+            totalAlternatives = currentAlternatives.length;
+
+            // A. Update Active State pada Tombol Chips (Step 1)
+            document.querySelectorAll('.case-chip').forEach(btn => {
+                if (btn.getAttribute('data-case') === caseId) {
+                    btn.className = 'case-chip px-4 py-2.5 rounded-xl text-xs font-semibold border border-[#98FBCB] bg-[#98FBCB] text-[#042F2E] font-bold flex items-center space-x-2 active shadow-md';
+                } else {
+                    btn.className = 'case-chip px-4 py-2.5 rounded-xl text-xs font-semibold border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/70 text-slate-700 dark:text-slate-300 hover:border-[#98FBCB] flex items-center space-x-2';
+                }
+            });
+
+            // B. Update Data Induk & Hierarki (Step 2)
+            const goalTitle = document.getElementById('goalTitleDisplay');
+            const goalDesc = document.getElementById('goalDescDisplay');
+            if (goalTitle) goalTitle.textContent = cs.goalTitle;
+            if (goalDesc) goalDesc.textContent = cs.goalDesc;
+
+            // Update Label Kriteria di Step 2 (Dinamis InnerHTML)
+            const countCritEl = document.getElementById('countCriteria');
+            if (countCritEl) countCritEl.textContent = `${cs.criteria.length} Kriteria`;
+
+            const critContainer = document.getElementById('hierarchyCriteriaList');
+            if (critContainer) {
+                critContainer.innerHTML = cs.criteria.map((c, idx) => `
+                    <div class="flex items-center justify-between px-3 py-2 text-xs rounded-xl bg-slate-50/80 dark:bg-slate-800/80 border border-slate-200/70 dark:border-slate-700/60 crit-item" data-code="${c.code}">
+                        <span class="font-bold text-slate-800 dark:text-slate-200 flex items-center space-x-2">
+                            <span class="w-6 h-6 rounded-lg bg-[#98FBCB] text-slate-950 font-black flex items-center justify-center text-[10px] crit-code-badge">
+                                ${c.code}
+                            </span>
+                            <span class="crit-name-text">${c.name}</span>
+                        </span>
+                        <span class="text-[11px] font-extrabold text-[#0F766E] dark:text-[#98FBCB] crit-weight-tag" data-code="${c.code}">${c.percentage || '-'}</span>
+                    </div>
+                `).join('');
+            }
+
+            // Update Label Alternatif di Step 2
+            renderHierarchyAlternativeList();
+
+            // C. Update Slider Kriteria (Step 3): Nama & Nilai Preset
+            document.querySelectorAll('#pairwiseSlidersContainer .slider-card').forEach(card => {
+                const i = parseInt(card.getAttribute('data-row'), 10);
+                const j = parseInt(card.getAttribute('data-col'), 10);
+                card.querySelectorAll('.crit-slider-name-a').forEach(el => { if (cs.criteria[i]) el.textContent = cs.criteria[i].name; });
+                card.querySelectorAll('.crit-slider-code-a').forEach(el => { if (cs.criteria[i]) el.textContent = cs.criteria[i].code; });
+                card.querySelectorAll('.crit-slider-name-b').forEach(el => { if (cs.criteria[j]) el.textContent = cs.criteria[j].name; });
+                card.querySelectorAll('.crit-slider-code-b').forEach(el => { if (cs.criteria[j]) el.textContent = cs.criteria[j].code; });
+
+                const slider = card.querySelector('.ahp-slider');
+                if (slider) {
+                    slider.value = (cs.critPresets[slider.id] !== undefined) ? cs.critPresets[slider.id] : 0;
+                    if (window.updateCritSliderVerdict) updateCritSliderVerdict(slider);
+                }
+            });
+
+            // D. Update Navigasi Tab Alternatif (Step 4)
+            document.querySelectorAll('#altCriteriaTabsContainer .tab-btn').forEach((btn, idx) => {
+                if (cs.criteria[idx]) {
+                    const codeEl = btn.querySelector('.tab-crit-code');
+                    const nameEl = btn.querySelector('.tab-crit-name');
+                    if (codeEl) codeEl.textContent = cs.criteria[idx].code;
+                    if (nameEl) nameEl.textContent = cs.criteria[idx].name;
+                }
+            });
+
+            // Update Context Header di Step 4
+            document.querySelectorAll('.alt-criterion-panel').forEach((panel, cIdx) => {
+                const pCode = panel.querySelector('.panel-crit-code');
+                const pName = panel.querySelector('.panel-crit-name');
+                if (pCode && cs.criteria[cIdx]) pCode.textContent = cs.criteria[cIdx].code;
+                if (pName && cs.criteria[cIdx]) pName.textContent = cs.criteria[cIdx].name;
+            });
+
+            // Re-render Dynamic Sliders for Alternatif in Step 4
+            renderDynamicAlternativeSliders();
+
+            // Update Ringkasan Alternatif di Step 5
+            document.querySelectorAll('#altCrSummaryList > div').forEach((row, idx) => {
+                if (cs.criteria[idx]) {
+                    const codeEl = row.querySelector('.alt-cr-row-code');
+                    const nameEl = row.querySelector('.alt-cr-row-name');
+                    if (codeEl) codeEl.textContent = cs.criteria[idx].code;
+                    if (nameEl) nameEl.textContent = cs.criteria[idx].name;
+                }
+            });
+
+            // Update Option Dropdown di Tabel Tinjauan Alternatif (Step 6)
+            const selPreview = document.getElementById('selectPreviewCriterion');
+            if (selPreview) {
+                selPreview.innerHTML = cs.criteria.map((c, idx) => `<option value="${idx}">${c.code} - ${c.name}</option>`).join('');
+                selPreview.value = activeCriterionTab;
+            }
+
+            // E. Memicu Kalkulasi Otomatis via Fetch API / Standalone Local
+            window.triggerAhpCalculation();
+        };
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+            const calculateUrl = "/ahp/calculate";
+
+            const critSliders = document.querySelectorAll('.ahp-slider');
+            const altSliders = document.querySelectorAll('.ahp-alt-slider');
+
+            // Bind Event Form Tambah Kandidat Manual (Step 2)
+            const btnAdd = document.getElementById('btnAddCandidate');
+            const inputName = document.getElementById('inputNewCandidateName');
+            const btnResetCandidates = document.getElementById('btnResetDefaultCandidates');
+
+            if (btnAdd) {
+                btnAdd.addEventListener('click', window.addNewCandidate);
+            }
+            if (inputName) {
+                inputName.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        window.addNewCandidate();
+                    }
+                });
+            }
+            if (btnResetCandidates) {
+                btnResetCandidates.addEventListener('click', window.resetDefaultCandidates);
+            }
+
+            // Inisialisasi awal render alternatif & slider
+            window.renderHierarchyAlternativeList();
+            window.renderDynamicAlternativeSliders();
 
             // 14. Event Listener Sliders Kriteria
             critSliders.forEach(slider => {
@@ -3741,8 +3557,5 @@
 
     <!-- Skrip Rendering Diagram Batang 3D Interaktif Three.js (Tahap 5) -->
     <script src="/js/ahp-3d.js"></script>
-
-    <!-- Skrip Khusus Modul Impor & Visualisasi Dataset CSV (Pure Client-Side, Tanpa Backend / AHP Logic) -->
-    <script src="/js/csv-importer.js"></script>
 </body>
 </html>

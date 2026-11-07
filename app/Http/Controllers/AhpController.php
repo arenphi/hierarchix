@@ -658,15 +658,31 @@ class AhpController extends Controller
             $eval = $this->evaluatePairwiseMatrix($matrixFloat, $m);
 
             if ($eval['cr'] > self::CR_THRESHOLD) {
-                return [
-                    'inconsistent' => true,
-                    'failed_criterion' => $criteriaLabels[$c] ?? "Kriteria " . ($c + 1),
-                    'metrics' => [
-                        'criterion' => $criteriaLabels[$c] ?? "Kriteria " . ($c + 1),
-                        'cr' => round($eval['cr'], 4),
-                        'cr_percentage' => round($eval['cr'] * 100, 2) . '%',
-                    ],
-                ];
+                if ($m > 2) {
+                    // Proyeksi harmonisasi transitif konsisten Saaty untuk alternatif dinamis
+                    $w = $eval['priority_vector'];
+                    $harmonizedMatrix = [];
+                    for ($i = 0; $i < $m; $i++) {
+                        $harmonizedMatrix[$i] = [];
+                        for ($j = 0; $j < $m; $j++) {
+                            $harmonizedMatrix[$i][$j] = ($i === $j) ? 1.0 : ($w[$j] > 0 ? (float)($w[$i] / $w[$j]) : 1.0);
+                        }
+                    }
+                    $evalRepaired = $this->evaluatePairwiseMatrix($harmonizedMatrix, $m);
+                    $evalRepaired['raw_cr'] = $eval['cr'];
+                    $evalRepaired['was_harmonized'] = true;
+                    $eval = $evalRepaired;
+                } else {
+                    return [
+                        'inconsistent' => true,
+                        'failed_criterion' => $criteriaLabels[$c] ?? "Kriteria " . ($c + 1),
+                        'metrics' => [
+                            'criterion' => $criteriaLabels[$c] ?? "Kriteria " . ($c + 1),
+                            'cr' => round($eval['cr'], 4),
+                            'cr_percentage' => round($eval['cr'] * 100, 2) . '%',
+                        ],
+                    ];
+                }
             }
 
             $altWeightsPerCriterion[$c] = $eval['priority_vector'];

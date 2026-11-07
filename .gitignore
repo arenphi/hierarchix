@@ -26,6 +26,14 @@ Thumbs.db
 .vercel
 .env*
 
-temp_chrome_profile/
+# Temporary tool & deployment artifacts
+*.zip
+*.docx
+*.xlsx
+*.py
 ~$*
-build_full_report_docx.py
+.wrangler/
+temp_chrome_profile/
+temp_chrome_prof*/
+extracted_docx_media/
+config.yml
