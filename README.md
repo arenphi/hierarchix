@@ -9,7 +9,6 @@
 [![PHP Version](https://img.shields.io/badge/PHP-8.2%2B-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net/)
 [![Three.js](https://img.shields.io/badge/Three.js-WebGL_3D-000000?style=for-the-badge&logo=threedotjs&logoColor=white)](https://threejs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![License](https://img.shields.io/badge/License-MIT-F59E0B?style=for-the-badge)](LICENSE)
 
 <p align="center">
   <b>Platform simulasi komputasi multikriteria modern, objektif, dan terverifikasi secara matematis untuk pemilihan Mahasiswa Berprestasi (Mawapres) dengan visualisasi 3 dimensi interaktif bertenaga Three.js WebGL.</b>
@@ -367,7 +366,7 @@ spk-ahp/
 
 ## 📄 Lisensi & Penulis
 
-Proyek ini dikembangkan sebagai karya implementasi ilmiah Sistem Pendukung Keputusan (SPK) menggunakan metode *Analytic Hierarchy Process* (AHP) dan visualisasi data 3D WebGL modern. Dilisensikan di bawah lisensi terbuka [MIT License](LICENSE).
+Proyek ini dikembangkan sebagai karya implementasi ilmiah Sistem Pendukung Keputusan (SPK) menggunakan metode *Analytic Hierarchy Process* (AHP) dan visualisasi data 3D WebGL modern.
 
 <div align="center">
   <b>Hierarchix © 2026 — Solusi Pengambilan Keputusan Multikriteria Objektif & Presisi</b>
